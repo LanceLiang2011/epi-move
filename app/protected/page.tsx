@@ -1,28 +1,37 @@
-import DeployButton from "@/components/auth/DeployButton";
-import AuthButton from "@/components/auth/AuthButton";
-import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
+import Logo from "@/components/Logo";
+import Username from "@/components/auth/username";
+import Link from "next/link";
+import React, { Suspense } from "react";
 
-export default async function ProtectedPage() {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/");
-  }
-
+export default async function Page() {
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <div className="w-full">
-        <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-          <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-            <DeployButton />
-            <AuthButton />
-          </div>
-        </nav>
+    <div className="flex flex-col items-center h-full w-full">
+      <div className=" py-12">
+        <Logo />
+      </div>
+      <div className="flex flex-col gap-2 bg-white rounded-xl w-full h-full px-12 py-16">
+        <p className=" text-primary text-2xl">Welcome to</p>
+        <div className=" text-background font-bold text-4xl">EpiMove</div>
+        <div className=" border-b-2 border-primary py-2 mb-6 w-2/5" />
+        <p className=" text-background">
+          Hello{" "}
+          {
+            <Suspense fallback={<span>Visitor</span>}>
+              <Username />
+            </Suspense>
+          }
+          , thank you for visiting EpiMove! We created the app to help you
+          explore physical activities that my be right for you
+        </p>
+        <p className=" text-background">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit, non
+          iure sapiente vero aliquam doloremque iste totam autem, commodi,
+          officiis laboriosam.
+        </p>
+        <div className="flex pt-2 justify-between text-background font-bold">
+          <Link href={`/protected/main`}>Skip</Link>
+          <Link href={`/protected/main`}>Next</Link>
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,7 @@
 import Logo from "@/components/Logo";
 import { SubmitButton } from "@/components/auth/submit-button";
-import { signIn } from "@/lib/actions";
-import IconButtonText from "@/components/icon-button-text";
-import { FaPhoneAlt } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { signUp } from "@/lib/actions";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -35,46 +32,27 @@ export default function Login() {
             Forgot password?
           </text>
         </div>
-        <SubmitButton
+        {/* <SubmitButton
           formAction={signIn}
           className="bg-primary rounded-md px-4 py-2 text-foreground mb-2"
           pendingText="Signing In..."
         >
           Log In
-        </SubmitButton>
-        {/* <SubmitButton
+        </SubmitButton> */}
+        <SubmitButton
           formAction={signUp}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
+          className="bg-primary rounded-md px-4 py-2 text-foreground mb-2"
           pendingText="Signing Up..."
         >
           Sign Up
-        </SubmitButton> */}
+        </SubmitButton>
+        <Link
+          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2 text-center"
+          href={`/`}
+        >
+          Back
+        </Link>
       </form>
-      <div className=" flex justify-center items-center gap-2 py-4">
-        <div className=" h-1 w-6 bg-foreground"></div>
-        <p className="text-foreground">Or</p>
-        <div className=" h-1 w-6 bg-foreground"></div>
-      </div>
-      <div className=" flex flex-col gap-6 items-center justify-center pt-6 pb-16">
-        <p>Sign up with</p>
-        <div className="flex gap-6">
-          <IconButtonText
-            label="Phone"
-            href="/signup/phone"
-            Icon={<FaPhoneAlt />}
-          />
-          <IconButtonText
-            label="Email"
-            href="/signup/email"
-            Icon={<MdEmail />}
-          />
-          <IconButtonText
-            label="Others"
-            href="/signup/others"
-            Icon={<HiOutlineDotsHorizontal />}
-          />
-        </div>
-      </div>
     </div>
   );
 }

@@ -19,7 +19,7 @@ export default async function ProtectedLayout({ children }: Props) {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="w-full h-full flex flex-col">
       <nav className="w-full flex justify-center h-16">
         <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
           <AuthButton />

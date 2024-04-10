@@ -6,7 +6,11 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
-export default function Login() {
+export default function Login({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
   return (
     <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
@@ -42,13 +46,11 @@ export default function Login() {
         >
           Log In
         </SubmitButton>
-        {/* <SubmitButton
-          formAction={signUp}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing Up..."
-        >
-          Sign Up
-        </SubmitButton> */}
+        {searchParams?.message && (
+          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+            {searchParams.message}
+          </p>
+        )}
       </form>
       <div className=" flex justify-center items-center gap-2 py-4">
         <div className=" h-1 w-6 bg-foreground"></div>

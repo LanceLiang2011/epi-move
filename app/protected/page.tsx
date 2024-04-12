@@ -5,11 +5,11 @@ import React, { Suspense } from "react";
 
 export default async function Page() {
   return (
-    <div className="flex flex-col items-center w-full">
-      <div className=" py-12">
+    <div className="flex flex-col items-center w-full h-full">
+      <div className="">
         <Logo />
       </div>
-      <div className="flex flex-col gap-2 bg-white rounded-xl w-full px-12 py-16">
+      <div className="flex flex-col flex-1 gap-2 bg-white rounded-xl w-full px-12 py-16">
         <p className=" text-primary text-2xl">Welcome to</p>
         <div className=" text-background font-bold text-4xl">EpiMove</div>
         <div className=" border-b-2 border-primary py-2 mb-6 w-2/5" />
@@ -28,7 +28,7 @@ export default async function Page() {
           iure sapiente vero aliquam doloremque iste totam autem, commodi,
           officiis laboriosam.
         </p>
-        <div className="flex pt-2 justify-between text-background font-bold">
+        <div className="flex pt-2 mt-auto justify-between text-background font-bold">
           <Link href={`/protected/main`}>Skip</Link>
           <Link href={`/protected/main`}>Next</Link>
         </div>

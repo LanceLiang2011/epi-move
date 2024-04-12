@@ -15,7 +15,7 @@ export default function Heading({ title, Icon, placeholder = "" }: Props) {
         <Input type="text" placeholder={placeholder} />
         <CiSearch
           className=" absolute right-6 bottom-6"
-          color="black"
+          color="white"
           size={24}
         />
       </div>

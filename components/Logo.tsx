@@ -6,7 +6,7 @@ export default function Logo() {
     <div className=" w-fit self-center">
       <Image
         className="w-full"
-        src={`/images/logo-placeholder-image.png`}
+        src={`/images/logo.png`}
         alt="Logo Place Holder"
         height={512}
         width={512}

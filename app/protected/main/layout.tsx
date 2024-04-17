@@ -7,9 +7,9 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   return (
-    <div className=" relative h-full page-grid">
-      <div className=" bg-white">{children}</div>
+    <>
+      <div className=" bg-white overflow-auto h-full">{children}</div>
       <BottomTabs />
-    </div>
+    </>
   );
 }

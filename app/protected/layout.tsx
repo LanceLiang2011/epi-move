@@ -19,9 +19,9 @@ export default async function ProtectedLayout({ children }: Props) {
   }
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="h-full w-full flex flex-col">
       <TopNav />
-      {children}
+      <div className="relative main-wrapper flex flex-col">{children}</div>
     </div>
   );
 }

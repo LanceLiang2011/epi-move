@@ -11,7 +11,7 @@ export default function BottomTabs() {
   const pathname = usePathname();
   const currentRoute = pathname.split("/").at(-1);
   return (
-    <div className="w-full h-24 bg-background flex justify-around items-center">
+    <div className="w-full bg-background flex justify-around items-center py-4">
       <Link
         className=" flex flex-col items-center gap-1"
         href={`/protected/main`}

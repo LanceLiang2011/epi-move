@@ -76,14 +76,14 @@ function PageTwo() {
       <p className=" text-background font-bold">
         Physical activity can help you
       </p>
-      <ul className=" text-background list-disc pl-4">
+      <ul className=" text-background list-disc list-inside">
         <li>Improve seizure control</li>
         <li>Enhance your mood3 and quality of life</li>
         <li>Have better sleep</li>
         <li>Reduces stress</li>
       </ul>
       <p className=" text-background font-bold">What EpiMove offers</p>
-      <ol className=" text-background list-decimal pl-4">
+      <ol className=" text-background list-decimal list-inside">
         <li>
           Activities: explore a variety of physical activities you can do alone,
           with peers or with family.

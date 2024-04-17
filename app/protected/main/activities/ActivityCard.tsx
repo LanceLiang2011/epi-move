@@ -29,9 +29,10 @@ export default function ActivityCard({ url, name, href }: Props) {
           alt={name}
           height={200}
           width={200}
+          priority={false}
         />
       </motion.div>
-      <caption className=" text-background">{name}</caption>
+      <span className=" text-background">{name}</span>
     </Link>
   );
 }

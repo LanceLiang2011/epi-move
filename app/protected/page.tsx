@@ -77,10 +77,17 @@ function PageTwo() {
         Physical activity can help you
       </p>
       <ul className=" text-background list-disc list-inside">
-        <li>Improve seizure control</li>
-        <li>Enhance your mood3 and quality of life</li>
+        <li>
+          Improve seizure control<span className="citation">1,2</span>
+        </li>
+        <li>
+          Enhance your mood<span className="citation">3</span> and quality of
+          life<span className="citation">4</span>
+        </li>
         <li>Have better sleep</li>
-        <li>Reduces stress</li>
+        <li>
+          Reduces stress<span className="citation">5</span>
+        </li>
       </ul>
       <p className=" text-background font-bold">What EpiMove offers</p>
       <ol className=" text-background list-decimal list-inside">

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { GiHamburgerMenu } from "react-icons/gi";
 import {
   Sheet,
@@ -8,6 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import Link from "next/link";
 
 export default function Hamburger() {
   return (
@@ -17,10 +19,17 @@ export default function Hamburger() {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>What are we going to up here?</SheetTitle>
+          <SheetTitle>Menu</SheetTitle>
+          <br />
           <SheetDescription>
-            This might be more tricky in the mobile app as this may force
-            different layers of Nav
+            <SheetPrimitive.Close asChild>
+              <Link
+                className=" font-bold text-lg text-foreground "
+                href={`/protected/main/references`}
+              >
+                References
+              </Link>
+            </SheetPrimitive.Close>
           </SheetDescription>
         </SheetHeader>
       </SheetContent>

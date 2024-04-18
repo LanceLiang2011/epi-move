@@ -90,6 +90,9 @@
   .top-nav {
     height: var(--nav-height);
   }
+  .citation {
+    @apply text-xs align-top text-gray-600 ml-1;
+  }
 }
 
   .animate-in {

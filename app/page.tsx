@@ -22,6 +22,7 @@ export default function Login({
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           name="email"
           placeholder="you@example.com"
+          autoCapitalize="off"
           required
         />
         <label className="text-md" htmlFor="password">
@@ -32,6 +33,7 @@ export default function Login({
           type="password"
           name="password"
           placeholder="••••••••"
+          autoCapitalize="off"
           required
         />
         <div className=" flex justify-end mb-2">

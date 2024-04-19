@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <div>
       <Heading
-        title="activity to enjoy"
+        title="activities to enjoy"
         placeholder="Search for activities"
         Icon={<FiTarget size={60} />}
       />

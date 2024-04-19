@@ -10,9 +10,12 @@ interface Props {
 export default function Layout({ children }: Props) {
   return (
     <div>
-      <Link href={`/protected/main/activities`}>
+      <Link
+        className="absolute top-3 left-3  z-10"
+        href={`/protected/main/activities`}
+      >
         <Button
-          className="absolute top-3 left-3 rounded-full opacity-60"
+          className="rounded-full opacity-60"
           variant="outline"
           size="icon"
         >

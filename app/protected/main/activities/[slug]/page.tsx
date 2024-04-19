@@ -6,7 +6,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const activity = activities[params.slug];
   return (
     <div className=" w-full">
-      <div className=" w-full z-0">
+      <div className=" w-full z-0 sticky top-0">
         <Image
           className=" object-fit w-full"
           height={200}

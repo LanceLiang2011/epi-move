@@ -236,15 +236,15 @@ const contentsMap: Record<string, string> = {
       <li>
           Assess your risks or do it with your doctor. British Rowing created a list of questions to ask yourself before participating in sports activities.<span class="citation">27</span>
           <ul class="list-disc list-inside pl-5">
-              <li>What are your seizures like?</li>
-              <li>Do you have seizures where you become unconscious, confused or are only partly aware of what is happening?</li>
-              <li>When was your last seizure?</li>
-              <li>Are your seizures controlled (stopped) with medication?</li>
-              <li>When do your seizures occur?</li>
-              <li>Are your seizures triggered by stress or tiredness?</li>
-              <li>Are there any signs or symptoms that warn you that a seizure is going to happen?</li>
-              <li>Would you be able to alert others and be able to get to a safe or safer place if on the water?</li>
-              <li>What would make rowing safer for you?</li>
+              <li class="no-line">What are your seizures like?</li>
+              <li class="no-line">Do you have seizures where you become unconscious, confused or are only partly aware of what is happening?</li>
+              <li class="no-line">When was your last seizure?</li>
+              <li class="no-line">Are your seizures controlled (stopped) with medication?</li>
+              <li class="no-line">When do your seizures occur?</li>
+              <li class="no-line">Are your seizures triggered by stress or tiredness?</li>
+              <li class="no-line">Are there any signs or symptoms that warn you that a seizure is going to happen?</li>
+              <li class="no-line">Would you be able to alert others and be able to get to a safe or safer place if on the water?</li>
+              <li class="no-line">What would make rowing safer for you?</li>
           </ul>
       </li>
       <li>Row with a friend, coach or instructor who knows how to assist in case of a seizure.</li>

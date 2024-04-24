@@ -78,6 +78,17 @@
         line-height: 28px;
         margin-bottom: 18px;
       }
+      li:not(:last-child) {
+        border-bottom: 1px solid #ccc; /* Sets a light gray border under each li except the last one */
+        padding-bottom: 12px; /* Optional: adds some space between the text and the border */
+        margin-bottom: 12px; /* Optional: adds space after the border */
+    }
+
+    li:not(:last-child).no-line {
+      border-bottom: none; /* Sets a light gray border under each li except the last one */
+      padding-bottom: 6px; /* Optional: adds some space between the text and the border */
+      margin-bottom: 6px; /* Optional: adds space after the border */
+  }
 
       h2, h3 {
         margin-bottom: 24px;
@@ -93,6 +104,7 @@
 
 
 @layer utilities {
+
   .main-wrapper {
     height: calc(100vh - var(--nav-height));
   }

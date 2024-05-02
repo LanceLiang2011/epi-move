@@ -20,7 +20,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           {activity.name}
         </h1>
         <div
-          className=" text-teal-950"
+          className=" text-teal-950 article prose lg:prose-xl"
           dangerouslySetInnerHTML={{ __html: activity.content }}
         />
         <div>

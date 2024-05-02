@@ -9,8 +9,8 @@ export default function Page({ params }: { params: { slug: string } }) {
       <div className=" w-full z-0 sticky top-0">
         <Image
           className=" object-fit w-full"
-          height={200}
-          width={600}
+          height={1280}
+          width={1920}
           alt={activity.slug}
           src={activity.url}
         />

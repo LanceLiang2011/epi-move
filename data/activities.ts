@@ -21,7 +21,7 @@ export const activitiesWithSlugs: ActivitySum[] = [
   },
   { name: "Baseball", slug: "baseball", url: "/images/baseball.jpeg" },
   { name: "Basketball", slug: "basketball", url: "/images/basketball.jpeg" },
-  { name: "Cycling", slug: "cycling", url: "/images/biking.jpeg" },
+  { name: "Cycling", slug: "cycling", url: "/images/cycling.jpeg" },
   { name: "Football or Soccer", slug: "football", url: "/images/soccer.jpeg" },
   { name: "Hiking", slug: "hiking", url: "/images/hiking.jpeg" },
   { name: "Lacrosse", slug: "lacrosse", url: "/images/lacrosse.jpeg" },
@@ -389,7 +389,7 @@ export const activities: ActivityMap = {
   cycling: {
     name: "Cycling",
     slug: "cycling",
-    url: "/images/biking.jpeg",
+    url: "/images/cycling.jpeg",
     content: contentsMap["cycling"],
   },
   football: {

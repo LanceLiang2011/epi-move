@@ -3,14 +3,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { altText, type Slugs } from "@/data/activities";
 
 interface Props {
   url: string;
   name: string;
   href: string;
+  slug: Slugs;
 }
 
-export default function ActivityCard({ url, name, href }: Props) {
+export default function ActivityCard({ url, name, href, slug }: Props) {
   return (
     <Link
       href={`/protected/main/activities/${href}`}
@@ -26,7 +28,7 @@ export default function ActivityCard({ url, name, href }: Props) {
         <Image
           className=" w-full h-full object-cover rounded-lg"
           src={url}
-          alt={name}
+          alt={altText[slug]}
           height={200}
           width={200}
           priority={false}

@@ -1,7 +1,7 @@
 import { url } from "inspector";
 
 interface ActivitySum {
-  slug: string;
+  slug: Slugs;
   name: string;
   url: string;
 }
@@ -12,6 +12,24 @@ interface Activity extends ActivitySum {
 }
 
 type ActivityMap = Record<string, Activity>;
+export type Slugs =
+  | "online-activities"
+  | "baseball"
+  | "basketball"
+  | "cycling"
+  | "football"
+  | "hiking"
+  | "lacrosse"
+  | "martial-arts"
+  | "rock-climbing"
+  | "roller-skating"
+  | "rowing"
+  | "running"
+  | "skiing"
+  | "swimming"
+  | "travel"
+  | "volleyball"
+  | "wrestling";
 
 export const activitiesWithSlugs: ActivitySum[] = [
   {
@@ -473,4 +491,36 @@ export const activities: ActivityMap = {
     url: "/images/wrestling.jpeg",
     content: contentsMap["wrestling"],
   },
+};
+
+export const altText: Record<Slugs, string> = {
+  "online-activities":
+    "Online activities: An individual performing yoga poses in front of a laptop.",
+  baseball:
+    "Baseball: A baseball player swinging a bat at a ball during a game.",
+  basketball: "Basketball: three people playing basketball outdoors.",
+  cycling:
+    "Cycling: two women enjoying a bike ride along the sandy beach with the ocean in the background.",
+  football:
+    "Soccer or Football: A group of kids playing soccer on a field, having fun and kicking the ball around.",
+  hiking:
+    "Hiking: a group of people walking up the mountain with warm tones of the sun reflecting in the background.",
+  lacrosse:
+    "Lacrosse: Two players running in a green grassy field holding their lacrosse sticks with their team members in the background.",
+  "martial-arts":
+    "Martial arts: A group of people in karate gear practicing martial arts on the sandy beach.",
+  "rock-climbing":
+    "Rock or mountain climbing: two people climbing a rock with gears and helmets.",
+  "roller-skating":
+    "Roller skating: A young boy happily gliding on roller blades, skating outdoors.",
+  rowing:
+    "Rowing: Three people rowing with vests and paddles. A beautiful sunset over a green lake with vibrant orange hues reflecting on the calm water.",
+  running: "Running, jogging or walking: A person running on a road at sunset",
+  skiing: "Skiing: Three skiers enjoying a snowy slope on a winter day.",
+  swimming: "Swimming: A person swimming in a pool with arms outstretched",
+  travel:
+    "Travel: A person sitting on a chair, legs crossed, with his suitcase in front of him and a plane taking off in the background.",
+  volleyball:
+    "Volleyball: Two volleyball players in action on a sandy court, spectators cheering.",
+  wrestling: "Wrestling: A diverse group of individuals in a gym practicing.",
 };

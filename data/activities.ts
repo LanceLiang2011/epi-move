@@ -123,7 +123,7 @@ const contentsMap: Record<string, string> = {
   <h3 class="font-bold">Resources: </h3>
   `,
   baseball: `<h3 class="font-bold">Collective Sports on the Ground</h3>
-  <p>Collective sports on the ground such as baseball are considered low-risk to people with epilepsy and bystanders should a seizure happen while playing.<span class="citation">7</span></p>
+  <p>Collective sports on the ground, such as baseball, are considered low-risk to people with epilepsy and bystanders should a seizure happen while playing.<span class="citation">7</span></p>
   
   <h3 class="font-bold">Safety Tips</h3>
   <ul class="list-inside list-decimal">
@@ -141,7 +141,7 @@ const contentsMap: Record<string, string> = {
       </li>
   </ul>`,
   basketball: `<h3 class="font-bold">Collective Sports on the Ground</h3>
-  <p>Collective sports on the ground such as basketball are considered low-risk to people with epilepsy and bystanders should a seizure happen while playing.<span class="citation">7</span></p>
+  <p>Collective sports on the ground, such as basketball, are considered low-risk to people with epilepsy and bystanders should a seizure happen while playing.<span class="citation">7</span></p>
   
   <h3 class="font-bold">Safety Tips</h3>
   <ul class="list-inside list-decimal">
@@ -179,7 +179,7 @@ const contentsMap: Record<string, string> = {
   </ul>
   `,
   football: `<h3 class="font-bold">Collective Sports on the Ground</h3>
-  <p>Collective sports on the ground such as football are considered low-risk to people with epilepsy and bystanders should a seizure happen while playing.</p>
+  <p>Collective sports on the ground, such as football, are considered low-risk to people with epilepsy and bystanders should a seizure happen while playing.</p>
   
   <h3 class="font-bold">Safety Tips</h3>
   <ul class="list-inside list-decimal">
@@ -202,7 +202,7 @@ const contentsMap: Record<string, string> = {
       <li>Take a break if you need to: stretch, take a deep breath and give yourself time to recover.<span class="citation">14,15</span></li>
   </ul>
   
-  <p>Start with shorter distances and smaller goals, these helped Nisshaa Muniandy. In her blog, she wrote “I didn't want my epilepsy to hold me back. Surprisingly, I managed to go on 2 hikes this year. I hope my story and my experience inspire others with epilepsy to try something they might be afraid of.”</p>
+  <p>Start with shorter distances and smaller goals; these helped Nisshaa Muniandy. In her blog, she wrote, “I didn't want my epilepsy to hold me back. Surprisingly, I managed to go on 2 hikes this year. I hope my story and my experience inspire others with epilepsy to try something they might be afraid of.”</p>
   `,
   lacrosse: `<p>It's possible to enjoy lacrosse. Take it from Maddie Gebert, an athlete of Temple University women's lacrosse team who has epilepsy.<span class="citation">16</span></p>
 
@@ -227,7 +227,7 @@ const contentsMap: Record<string, string> = {
       <li>Remember to warm up and cool down to reduce the risk of injuries. Try stretching your arms, back, neck, trunk, wrists and ankles for up to 15 minutes before participating in martial arts.<span class="citation">21</span></li>
   </ul>
   `,
-  "rock-climbing": `<p>Generally, individuals with uncontrolled seizures should avoid rock or mountain climbing.<span class="citation">9</span> But many young people with epilepsy have done it before, check out some of the stories <a href="URL-TO-STORIES" class="text-blue-500 hover:text-blue-700">here</a>. Be sure to ask your doctor first if you can participate in these activities.</p>
+  "rock-climbing": `<p>Generally, individuals with uncontrolled seizures should avoid rock or mountain climbing.<span class="citation">9</span> But many young people with epilepsy have done it before. Check out some of the stories <a href="URL-TO-STORIES" class="text-blue-500 hover:text-blue-700">here</a>. Be sure to ask your doctor first if you can participate in these activities.</p>
 
   <h3 class="font-bold">Safety Tips</h3>
   <ul class="list-inside list-decimal">
@@ -279,7 +279,7 @@ const contentsMap: Record<string, string> = {
       <li>Avoid using a treadmill alone because falling can lead to major injuries. It's better to run, jog or walk outside or on a track.<span class="citation">28</span></li>
       <li>Avoid busy streets and dangerous trails.<span class="citation">29</span></li>
       <li>Use safety gear like helmet, elbow pads, and knee pads when appropriate.<span class="citation">29</span></li>
-      <li>Take a break whenever you need to and stay hydrated.<span class="citation">29</span></li>
+      <li>Take a break whenever you need to, and stay hydrated.<span class="citation">29</span></li>
   </ul>
   `,
   skiing: `<h3 class="font-bold">Safety Tips</h3>
@@ -298,7 +298,7 @@ const contentsMap: Record<string, string> = {
   <ul class="list-inside list-decimal">
       <li>Never swim alone, and if possible, swim in areas with a lifeguard on duty. If a lifeguard is not available, make sure to have a watcher with you. Always swim with someone who is aware of your seizures and can assist you if necessary.<span class="citation">33</span></li>
       <li>When you are in a pool, swim closer to the outside lane to make it easier for people to help you when needed.<span class="citation">33</span></li>
-      <li>Wear brightly coloured swim gear that will stand out from your surroundings, like a neon green cap when swimming in blue pool water.<span class="citation">33</span></li>
+      <li>Wear brightly coloured swim gear that will stand out from your surroundings, like a neon green cap, when swimming in blue pool water.<span class="citation">33</span></li>
       <li>Ensure you maintain adequate energy levels by avoiding fatigue, staying hydrated, and monitoring blood sugar levels.<span class="citation">33</span></li>
       <li>Swimming in a swimming pool is generally safer than swimming in open water like lakes, oceans, or rivers.<span class="citation">33</span></li>
   </ul>
@@ -307,7 +307,7 @@ const contentsMap: Record<string, string> = {
   <ul class="list-inside list-decimal">
       <li>Make sure your travel companion knows how to help if you have a seizure.</li>
       <li>Choose travel options where you can access emergency support if needed.</li>
-      <li>Find places to stay that meets your needs (dietary preferences, mobility aids, recovery space after a seizure).</li>
+      <li>Find places to stay that meet your needs (dietary preferences, mobility aids, recovery space after a seizure).</li>
       <li>Pack enough food and water.</li>
   </ul>
   
@@ -357,7 +357,7 @@ const contentsMap: Record<string, string> = {
   </ul>
   `,
   volleyball: `<h3 class="font-bold">Safety Tips</h3>
-  <p>Most team sports taking place on a court such as volleyball have no significant additional risk to young people with epilepsy or bystanders.<span class="citation">7</span></p>
+  <p>Most team sports taking place on a court, such as volleyball, have no significant additional risk to young people with epilepsy or bystanders.<span class="citation">7</span></p>
   
   <ul class="list-inside list-decimal">
       <li>Make sure to tell your friends, teammates, or coaches about your epilepsy and what to do in case of a seizure.<span class="citation">8</span></li>
@@ -367,7 +367,7 @@ const contentsMap: Record<string, string> = {
   </ul>
   `,
   wrestling: `<h3 class="font-bold">Safety Tips</h3>
-  <p>Most collective contact sports such as wrestling have no significant additional risk to young people with epilepsy or bystanders.<span class="citation">7</span></p>
+  <p>Most collective contact sports, such as wrestling, have no significant additional risk to young people with epilepsy or bystanders.<span class="citation">7</span></p>
   
   <ul class="list-inside list-decimal">
       <li>Make sure to tell your friends, teammates, or coaches about your epilepsy and what to do in case of a seizure.<span class="citation">8</span></li>

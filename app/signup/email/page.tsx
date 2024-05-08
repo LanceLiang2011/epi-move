@@ -5,30 +5,39 @@ import Link from "next/link";
 
 export default function Login() {
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
+    <div className="flex w-full flex-1 flex-col justify-center gap-2 px-8 sm:max-w-md">
+      <form className="flex w-full flex-1 flex-col justify-center gap-2 text-foreground animate-in">
         <Logo />
         <label className="text-md" htmlFor="email">
           Email
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          className="mb-6 rounded-md border bg-inherit px-4 py-2"
           name="email"
           placeholder="you@example.com"
+          required
+        />
+        <label className="text-md" htmlFor="username">
+          User Name
+        </label>
+        <input
+          className="mb-6 rounded-md border bg-inherit px-4 py-2"
+          name="username"
+          placeholder="Joe Doe"
           required
         />
         <label className="text-md" htmlFor="password">
           Password
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          className="mb-6 rounded-md border bg-inherit px-4 py-2"
           type="password"
           name="password"
           placeholder="••••••••"
           required
         />
-        <div className=" flex justify-end mb-2">
-          <text className="font-light text-sm align-text-bottom hover:text-gray-200 active:text-gray-200 cursor-pointer">
+        <div className=" mb-2 flex justify-end">
+          <text className="cursor-pointer align-text-bottom text-sm font-light hover:text-gray-200 active:text-gray-200">
             Forgot password?
           </text>
         </div>
@@ -41,13 +50,13 @@ export default function Login() {
         </SubmitButton> */}
         <SubmitButton
           formAction={signUp}
-          className="bg-primary rounded-md px-4 py-2 text-foreground mb-2"
+          className="mb-2 rounded-md bg-primary px-4 py-2 text-foreground"
           pendingText="Signing Up..."
         >
           Sign Up
         </SubmitButton>
         <Link
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2 text-center"
+          className="mb-2 rounded-md border border-foreground/20 px-4 py-2 text-center text-foreground"
           href={`/`}
         >
           Back

@@ -9,6 +9,11 @@ export default async function AuthButton() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  const { data: userdata } = await supabase
+    .from("users")
+    .select("username")
+    .eq("id", user?.id);
+
   const signOut = async () => {
     "use server";
 
@@ -19,9 +24,9 @@ export default async function AuthButton() {
 
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
+      Hey, {userdata![0].username}!
       <form action={signOut}>
-        <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
+        <button className="rounded-md bg-btn-background px-4 py-2 no-underline hover:bg-btn-background-hover">
           Logout
         </button>
       </form>
@@ -29,7 +34,7 @@ export default async function AuthButton() {
   ) : (
     <Link
       href="/"
-      className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
+      className="flex rounded-md bg-btn-background px-3 py-2 no-underline hover:bg-btn-background-hover"
     >
       Login
     </Link>

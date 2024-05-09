@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export const signIn = async (formData: FormData) => {
   "use server";
@@ -69,3 +70,39 @@ export const signUp = async (formData: FormData) => {
 
   return redirect("/?message=Check email to continue sign in process");
 };
+
+export type NoteFormData = {
+  activity: string;
+  note: string;
+};
+
+export type DeleteNoteFormData = {
+  note_id: string;
+};
+
+export async function createNote(data: NoteFormData) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { data: responseData, error } = await supabase.from("notes").insert([
+    {
+      user_id: user?.id,
+      activity_id: data.activity,
+      note: data.note,
+    },
+  ]);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/protected/main");
+}
+
+export async function deleteNote(data: FormData) {
+  const noteId = data.get("note_id");
+  const supabase = createClient();
+  console.log(noteId);
+  await supabase.from("notes").delete().eq("id", noteId);
+  revalidatePath("/protected/main");
+}

@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { useTransition } from "react";
+import { createNote, type NoteFormData } from "@/lib/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -22,6 +24,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -43,11 +46,16 @@ const FormSchema = z.object({
 });
 
 export default function NoteForm({ activities }: Props) {
+  const [isPending, startTransition] = useTransition();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    alert("Sanity");
+    startTransition(() => {
+      createNote(data);
+    });
   }
   return (
     <Form {...form}>
@@ -66,10 +74,7 @@ export default function NoteForm({ activities }: Props) {
                 </FormControl>
                 <SelectContent>
                   {activities.map((activity) => (
-                    <SelectItem
-                      key={activity.id}
-                      value={slugify(activity.name)}
-                    >
+                    <SelectItem key={activity.id} value={activity.id}>
                       {activity.name}
                     </SelectItem>
                   ))}
@@ -102,7 +107,9 @@ export default function NoteForm({ activities }: Props) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <DialogClose asChild>
+          <Button type="submit">Submit</Button>
+        </DialogClose>
       </form>
     </Form>
   );

@@ -18,6 +18,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { ImCross } from "react-icons/im";
+
 interface Props {
   noteId: string;
   activity: string;
@@ -26,7 +28,7 @@ interface Props {
 
 export default function NoteCard({ noteId, activity, note }: Props) {
   return (
-    <Card className="transparent-card flex-1">
+    <Card className="transparent-card relative flex-1">
       <CardHeader className="px-0">
         <CardTitle className="mb-2 text-xl">{activity}</CardTitle>
         <div className=" flex flex-col items-stretch gap-2">
@@ -45,9 +47,14 @@ export default function NoteCard({ noteId, activity, note }: Props) {
               </div>
             </DialogContent>
           </Dialog>
-          <form className=" w-full" action={deleteNote}>
+          <form
+            className=" absolute right-2 top-2 text-red-700"
+            action={deleteNote}
+          >
             <input type="hidden" name="note_id" value={noteId} />
-            <Button className=" bg-red-800">Delete</Button>
+            <button type="submit">
+              <ImCross />
+            </button>
           </form>
         </div>
       </CardHeader>

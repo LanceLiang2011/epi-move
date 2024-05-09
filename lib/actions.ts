@@ -76,19 +76,21 @@ export type NoteFormData = {
   note: string;
 };
 
+export type ActivityFormData = {
+  name: string;
+  description: string;
+};
+
 export type DeleteNoteFormData = {
   note_id: string;
 };
 
-export async function createNote(data: NoteFormData) {
+export async function createNote(data: NoteFormData, userid: string) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   const { data: responseData, error } = await supabase.from("notes").insert([
     {
-      user_id: user?.id,
+      user_id: userid,
       activity_id: data.activity,
       note: data.note,
     },
@@ -102,7 +104,19 @@ export async function createNote(data: NoteFormData) {
 export async function deleteNote(data: FormData) {
   const noteId = data.get("note_id");
   const supabase = createClient();
-  console.log(noteId);
   await supabase.from("notes").delete().eq("id", noteId);
+  revalidatePath("/protected/main");
+}
+
+export async function createActivity(data: ActivityFormData, userid: string) {
+  const supabase = createClient();
+  const { error } = await supabase.from("activities").insert([
+    {
+      created_by: userid,
+      name: data.name,
+    },
+  ]);
+
+  if (error) throw new Error(error.message);
   revalidatePath("/protected/main");
 }

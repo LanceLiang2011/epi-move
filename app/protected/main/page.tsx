@@ -6,6 +6,7 @@ import NoteForm from "@/components/NoteForm";
 import ActivitiesForm from "@/components/ActivitiesForm";
 import type { ActivityInfo } from "@/data/activities";
 import NoteCard from "./NoteCard";
+import { MdOutlineEditNote, MdOutlineSportsGymnastics } from "react-icons/md";
 
 export default async function MainPage() {
   const supabase = createClient(); // Only okay in SSR as this function won't rerun.
@@ -44,24 +45,37 @@ export default async function MainPage() {
     <div className="flex h-full w-full flex-1 flex-col items-start justify-center gap-6 bg-gradient-to-b from-fuchsia-950 to-background p-6">
       <div>
         <h1 className=" text-3xl font-bold">Hi {userdata![0].username}</h1>
-        <p className=" text-lg">x notes</p>
+        <p className=" text-lg text-gray-200">
+          You have {notes?.length ?? 0}{" "}
+          {notes?.length && notes.length > 1 ? "notes" : "note"}
+        </p>
       </div>
-      <h2 className=" text-2xl font-semibold">My Notes</h2>
+      <div className=" flex w-full items-center">
+        <h2 className=" text-2xl font-semibold">My Notes</h2>
+        <div className=" ml-auto rounded-full bg-primary p-2">
+          <MdOutlineEditNote />
+        </div>
+      </div>
       <div className="flex gap-4">
         <AddDataDialog
           title="New Activiy"
           description="Crate Your own activity here"
         >
-          <ActivitiesForm />
+          <ActivitiesForm userid={user?.id ?? ""} />
         </AddDataDialog>
         <AddDataDialog
           title="New Note"
           description="Add your note for activity"
         >
-          <NoteForm activities={activities} />
+          <NoteForm activities={activities} userid={user?.id ?? ""} />
         </AddDataDialog>
       </div>
-      <h2 className=" text-2xl font-semibold">My Activities</h2>
+      <div className=" flex w-full items-center">
+        <h2 className=" text-2xl font-semibold">My Activities</h2>
+        <div className=" ml-auto rounded-full bg-primary p-2">
+          <MdOutlineSportsGymnastics />
+        </div>
+      </div>
       <div className="grid grid-cols-2 place-content-stretch place-items-stretch gap-4">
         {notes && notes.length > 0 ? (
           notes.map((note) => (

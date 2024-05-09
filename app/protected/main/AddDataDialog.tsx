@@ -15,6 +15,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { Toaster } from "@/components/ui/toaster";
+
 interface Props {
   children: ReactNode;
   title: string;
@@ -40,6 +42,7 @@ export default function AddDataDialog({ children, title, description }: Props) {
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {children}
+        <Toaster />
       </DialogContent>
     </Dialog>
   );

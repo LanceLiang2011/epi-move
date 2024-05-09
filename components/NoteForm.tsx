@@ -2,16 +2,14 @@
 
 import React from "react";
 import { useTransition } from "react";
-import { createNote, type NoteFormData } from "@/lib/actions";
+import { createNote } from "@/lib/actions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -24,19 +22,21 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { DialogClose } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
-import { slugify } from "@/lib/utils";
+import { ToastAction } from "@/components/ui/toast";
+
+import { DialogClose } from "@/components/ui/dialog";
+
 import type { ActivityInfo } from "@/data/activities";
 
 interface Props {
   activities: ActivityInfo[];
+  userid: string;
 }
 
-const FormSchema = z.object({
+const formSchema = z.object({
   activity: z.string({
     required_error: "Please select an activity.",
   }),
@@ -45,16 +45,24 @@ const FormSchema = z.object({
   }),
 });
 
-export default function NoteForm({ activities }: Props) {
+export default function NoteForm({ activities, userid }: Props) {
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
   });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    startTransition(() => {
-      createNote(data);
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    startTransition(async () => {
+      await createNote(data, userid);
+      toast({
+        title: "Note created successfully",
+        action: (
+          <DialogClose asChild>
+            <ToastAction altText="Close">Close</ToastAction>
+          </DialogClose>
+        ),
+      });
     });
   }
   return (
@@ -107,9 +115,7 @@ export default function NoteForm({ activities }: Props) {
             </FormItem>
           )}
         />
-        <DialogClose asChild>
-          <Button type="submit">Submit</Button>
-        </DialogClose>
+        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );

@@ -62,7 +62,7 @@ export default async function MainPage() {
         </AddDataDialog>
       </div>
       <h2 className=" text-2xl font-semibold">My Activities</h2>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 place-content-stretch place-items-stretch gap-4">
         {notes && notes.length > 0 ? (
           notes.map((note) => (
             <NoteCard

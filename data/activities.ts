@@ -11,6 +11,12 @@ interface Activity extends ActivitySum {
   videos?: string[];
 }
 
+export interface ActivityInfo {
+  id: string;
+  name: string;
+  created: string;
+}
+
 type ActivityMap = Record<string, Activity>;
 export type Slugs =
   | "online-activities"

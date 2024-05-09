@@ -2,12 +2,25 @@ import React from "react";
 import { createClient } from "@/lib/supabase/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import AddDataDialog from "./AddDataDialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import NoteForm from "@/components/NoteForm";
+import ActivitiesForm from "@/components/ActivitiesForm";
+import type { ActivityInfo } from "@/data/activities";
 
 export default async function MainPage() {
   const supabase = createClient(); // Only okay in SSR as this function won't rerun.
+  async function fetchActivities(userId: string) {
+    const { data, error } = await supabase
+      .from("activities")
+      .select("*")
+      .or(`created_by.eq.${userId},created_by.is.null`);
+
+    if (error) {
+      console.error("Error fetching activities:", error);
+      return null;
+    }
+
+    return data;
+  }
 
   const {
     data: { user },
@@ -17,6 +30,8 @@ export default async function MainPage() {
     .from("users")
     .select("username, favorite_activities")
     .eq("id", user?.id);
+
+  const activities = (await fetchActivities(user!.id)) as ActivityInfo[];
 
   return (
     <div className="flex w-full flex-1 flex-col items-start justify-center gap-6 bg-gradient-to-b from-fuchsia-950 to-background p-6">
@@ -30,34 +45,13 @@ export default async function MainPage() {
           title="New Activiy"
           description="Crate Your own activity here"
         >
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input
-                id="name"
-                defaultValue="Basketball"
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="description" className="text-right">
-                Description
-              </Label>
-              <Textarea
-                id="description"
-                placeholder="A ball game"
-                className="col-span-3"
-              />
-            </div>
-          </div>
+          <ActivitiesForm />
         </AddDataDialog>
         <AddDataDialog
           title="New Note"
           description="Add your note for activity"
         >
-          <></>
+          <NoteForm activities={activities} />
         </AddDataDialog>
       </div>
       <h2 className=" text-2xl font-semibold">My Activities</h2>

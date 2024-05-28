@@ -1,4 +1,4 @@
-import { Goal, Star, UsersRound, type LucideIcon } from "lucide-react";
+import { Goal, Star, BadgeAlert, type LucideIcon } from "lucide-react";
 import { IoTennisballSharp } from "react-icons/io5";
 import type { IconType } from "react-icons";
 
@@ -11,6 +11,13 @@ interface Resource {
 }
 
 export const resources: Resource[] = [
+  {
+    name: "Preparing for seizures",
+    slug: "preparing-for-seizures",
+    url: "preparing-for-seizures",
+    description: "Epilepsy Foundation Seizure Action Plan",
+    Icon: BadgeAlert,
+  },
   {
     name: "Setting goals",
     slug: "setting-goals",
@@ -32,12 +39,5 @@ export const resources: Resource[] = [
     url: "success-stories",
     description: "Be inspired by success stories of individuals with epilepsy",
     Icon: Star,
-  },
-  {
-    name: "Online groups",
-    slug: "Online-groups",
-    url: "Online-groups",
-    description: "Connect and learn with peers about physical activities",
-    Icon: UsersRound,
   },
 ];

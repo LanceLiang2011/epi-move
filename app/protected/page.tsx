@@ -3,6 +3,7 @@ import Logo from "@/components/Logo";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 function returnPage(page: number, username?: string) {
   switch (page) {
@@ -22,26 +23,42 @@ export default function Page() {
   const supabase = createClient();
   const [user, setUser] = useState<string | undefined>(undefined);
   const [page, setPage] = useState<number>(1);
+  const router = useRouter();
 
   useEffect(() => {
     async function getUser() {
       const { data } = await supabase.auth.getUser();
-      setUser(data.user?.email ?? undefined);
+      if (!data.user) return;
+      const { data: userdata } = await supabase
+        .from("users")
+        .select("username, visited")
+        .eq("id", data.user.id);
+      if (!userdata) return;
+      setUser(userdata[0].username);
+
+      await supabase
+        .from("users")
+        .update({ visited: true })
+        .eq("id", data.user.id);
+
+      if (userdata[0].visited) {
+        router.push(`/protected/main`);
+      }
     }
 
     getUser();
   }, []);
   return (
-    <div className="flex flex-col items-center w-full h-full">
+    <div className="flex h-full w-full flex-col items-center">
       <div className="">
         <Logo />
       </div>
-      <div className="flex flex-col flex-1 gap-2 bg-white rounded-xl w-full px-12 py-16">
-        <p className=" text-primary text-2xl">Welcome to</p>
-        <div className=" text-background font-bold text-4xl">EpiMove</div>
-        <div className=" border-b-2 border-primary py-2 mb-6 w-2/5" />
+      <div className="flex w-full flex-1 flex-col gap-2 rounded-xl bg-white px-12 py-16">
+        <p className=" text-2xl text-primary">Welcome to</p>
+        <div className=" text-4xl font-bold text-background">EpiMove</div>
+        <div className=" mb-6 w-2/5 border-b-2 border-primary py-2" />
         {returnPage(page, user)}
-        <div className="flex pt-2 mt-auto justify-between text-background font-bold">
+        <div className="mt-auto flex justify-between pt-2 font-bold text-background">
           <Link href={`/protected/main`}>Skip</Link>
           {page === 2 ? (
             <Link href={`/protected/main`}>Enter</Link>
@@ -73,10 +90,10 @@ function PageOne({ username }: { username: string | null | undefined }) {
 function PageTwo() {
   return (
     <>
-      <p className=" text-background font-bold">
+      <p className=" font-bold text-background">
         Physical activity can help you
       </p>
-      <ul className=" text-background list-disc list-inside">
+      <ul className=" list-inside list-disc text-background">
         <li>
           Improve seizure control<span className="citation">1,2</span>
         </li>
@@ -89,8 +106,8 @@ function PageTwo() {
           Reduces stress<span className="citation">5</span>
         </li>
       </ul>
-      <p className=" text-background font-bold">What EpiMove offers</p>
-      <ol className=" text-background list-decimal list-inside">
+      <p className=" font-bold text-background">What EpiMove offers</p>
+      <ol className=" list-inside list-decimal text-background">
         <li>
           Activities: explore a variety of physical activities you can do alone,
           with peers or with family.

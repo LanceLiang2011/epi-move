@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import DowloadButton from "./dowload-button";
+import DowloadButton from "../dowload-button";
 
 export default function Page() {
   return (
@@ -36,7 +36,11 @@ export default function Page() {
           </p>
         </div>
         <div className="my-8 flex items-center justify-center">
-          <DowloadButton />
+          <DowloadButton
+            link={
+              "https://www.epilepsy.com/preparedness-safety/action-plans#:~:text=Local%20Epilepsy%20Foundation-,How%20do%20I%20make%20a%20Seizure%20Action%20Plan%3F,-Use%20these%20forms"
+            }
+          />
         </div>
         <div className="article prose text-teal-950 lg:prose-xl">
           <p>

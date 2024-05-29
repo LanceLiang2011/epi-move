@@ -14,7 +14,7 @@ export default function DowloadButton({ link }: Props) {
       href={link}
       target="_blank"
     >
-      Dowload
+      Download
     </motion.a>
   );
 }

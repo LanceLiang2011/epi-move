@@ -91,7 +91,7 @@ export default function ActivitiesForm({ userid }: Props) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Save</Button>
       </form>
     </Form>
   );

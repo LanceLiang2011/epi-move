@@ -7,7 +7,7 @@ interface Resource {
   slug: string;
   url: string;
   description: string;
-  Icon: LucideIcon | IconType;
+  Icon: LucideIcon | IconType | string;
 }
 
 export const resources: Resource[] = [
@@ -30,7 +30,7 @@ export const resources: Resource[] = [
     slug: "nearby-activity-centres",
     url: "nearby-activity-centres",
     description: "Find out where you can participate in physical activities",
-    Icon: IoTennisballSharp,
+    Icon: "/images/jooay.svg",
   },
 
   {

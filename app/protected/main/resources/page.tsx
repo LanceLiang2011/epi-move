@@ -1,6 +1,7 @@
 import Heading from "@/components/navigations/Heading";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { GiOpenBook } from "react-icons/gi";
 import { resources } from "@/data/resources";
 
@@ -26,7 +27,11 @@ export default function Page() {
             key={resource.slug}
             href={`/protected/main/resources/${resource.slug}`}
           >
-            <resource.Icon size={128} />
+            {typeof resource.Icon !== "string" ? (
+              <resource.Icon size={128} />
+            ) : (
+              <Image alt="logo" src={resource.Icon} height={128} width={128} />
+            )}
             <div>
               <h2 className="text-lg font-semibold">{resource.name}</h2>
               <p>{resource.description}</p>

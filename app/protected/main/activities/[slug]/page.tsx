@@ -6,7 +6,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const activity = activities[params.slug];
   return (
     <div className=" w-full">
-      <div className=" w-full z-0 sticky top-0">
+      <div className=" sticky top-0 z-0 w-full">
         <Image
           className=" object-fit w-full"
           height={1280}
@@ -15,17 +15,22 @@ export default function Page({ params }: { params: { slug: string } }) {
           src={activity.url}
         />
       </div>
-      <div className=" rounded-3xl relative px-6 pt-8 -top-6 bg-white z-10">
-        <h1 className=" capitalize text-3xl text-background  py-6">
+      <div className=" relative -top-6 z-10 rounded-3xl bg-white px-6 pt-8">
+        <h1 className=" py-6 text-3xl capitalize  text-background">
           {activity.name}
         </h1>
+        <p className=" mb-4 italic text-gray-500">
+          Talk to your doctor first before participating in any physical
+          activities. You can show them the information here and add notes about
+          their recommendations.
+        </p>
         <div
-          className=" text-teal-950 article prose lg:prose-xl"
+          className=" article prose text-teal-950 lg:prose-xl"
           dangerouslySetInnerHTML={{ __html: activity.content }}
         />
         <div>
           {activity.videos && (
-            <div className="py-6 flex flex-col gap-4 items-center">
+            <div className="flex flex-col items-center gap-4 py-6">
               {activity.videos.map((v, i) => (
                 <div dangerouslySetInnerHTML={{ __html: v }} />
               ))}

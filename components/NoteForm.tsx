@@ -115,7 +115,7 @@ export default function NoteForm({ activities, userid }: Props) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Save</Button>
       </form>
     </Form>
   );

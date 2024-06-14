@@ -42,7 +42,7 @@ export default function Page() {
         .eq("id", data.user.id);
 
       if (userdata[0].visited) {
-        router.push(`/protected/main`);
+        router.push(`/protected/main/activities`);
       }
     }
 
@@ -59,9 +59,9 @@ export default function Page() {
         <div className=" mb-6 w-2/5 border-b-2 border-primary py-2" />
         {returnPage(page, user)}
         <div className="mt-auto flex justify-between pt-2 font-bold text-background">
-          <Link href={`/protected/main`}>Skip</Link>
+          <Link href={`/protected/main/activities`}>Skip</Link>
           {page === 2 ? (
-            <Link href={`/protected/main`}>Enter</Link>
+            <Link href={`/protected/main/activities`}>Enter</Link>
           ) : (
             <button onClick={() => setPage((p) => p + 1)}>Next</button>
           )}

@@ -44,11 +44,28 @@ export default async function MainPage() {
   return (
     <div className="flex h-full w-full flex-1 flex-col items-start justify-center gap-6 bg-gradient-to-b from-fuchsia-950 to-background p-6">
       <div>
-        <h1 className=" text-3xl font-bold">Hi {userdata![0].username}</h1>
-        <p className=" text-lg text-gray-200">
+        <h1 className=" text-3xl font-bold">Hi {userdata![0].username},</h1>
+        <h2 className="text-2xl font-semibold">
+          welcome to your profile page!
+        </h2>
+        <div className="mt-4 max-w-[32rem] text-gray-200">
+          <p>Here you can:</p>
+          <ul className="list-disc pl-8">
+            <li>Select an activity that you are interested to explore.</li>
+            <li>
+              Talk about the activity with your doctor in your next clinic
+              visit.
+            </li>
+            <li>
+              Add notes to each of the activity or mark those you like as your
+              favourite.
+            </li>
+          </ul>
+        </div>
+        {/* <p className=" text-lg text-gray-200">
           You have {notes?.length ?? 0}{" "}
           {notes?.length && notes.length > 1 ? "notes" : "note"}
-        </p>
+        </p> */}
       </div>
       <div className=" flex w-full items-center">
         <h2 className=" text-2xl font-semibold">My Notes</h2>

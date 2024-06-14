@@ -19,13 +19,6 @@ export default function Page() {
           Setting Goals
         </h1>
         <div className="article prose text-teal-950 lg:prose-xl">
-          <p>
-            If you have been seizure-free for at least 12 months or if you have
-            resolved epilepsy, you may participate in any type of exercise or
-            physical activity. Resolved epilepsy means not having seizures for
-            at least 10 years and not using anti-seizure medication for at least
-            five years<span className="citation">39</span>.
-          </p>
           <p>Steps to set physical activity goals:</p>
           <ol>
             <li>
@@ -63,6 +56,13 @@ export default function Page() {
               </ul>
             </li>
           </ol>
+          <p>
+            If you have been seizure-free for at least 12 months or if you have
+            resolved epilepsy, you may participate in any type of exercise or
+            physical activity. Resolved epilepsy means not having seizures for
+            at least 10 years and not using anti-seizure medication for at least
+            five years<span className="citation">39</span>.
+          </p>
           <p>
             Sail for Epilepsy shared a sheet you can use to set your goals with
             your healthcare team.<span className="citation">43</span>

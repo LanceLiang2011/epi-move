@@ -1,5 +1,5 @@
 import { Goal, Star, BadgeAlert, type LucideIcon } from "lucide-react";
-import { IoTennisballSharp } from "react-icons/io5";
+import { SlLocationPin } from "react-icons/sl";
 import type { IconType } from "react-icons";
 
 interface Resource {
@@ -30,7 +30,7 @@ export const resources: Resource[] = [
     slug: "nearby-activity-centres",
     url: "nearby-activity-centres",
     description: "Find out where you can participate in physical activities",
-    Icon: "/images/jooay.svg",
+    Icon: SlLocationPin,
   },
 
   {

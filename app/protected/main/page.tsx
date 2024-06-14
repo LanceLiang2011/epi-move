@@ -53,7 +53,7 @@ export default async function MainPage() {
           <ul className="list-disc pl-8">
             <li>Select an activity that you are interested to explore.</li>
             <li>
-              Talk about the activity with your doctor in your next clinic
+              Talk about the activity with your doctor during your next clinic
               visit.
             </li>
             <li>

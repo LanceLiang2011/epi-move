@@ -30,7 +30,9 @@ export default function NoteCard({ noteId, activity, note }: Props) {
   return (
     <Card className="transparent-card relative flex-1">
       <CardHeader className="px-0">
-        <CardTitle className="mb-2 text-xl">{activity}</CardTitle>
+        <CardTitle className="mb-2 text-xl text-background">
+          {activity}
+        </CardTitle>
         <div className=" flex flex-col items-stretch gap-2">
           <Dialog>
             <div className="w-full">
@@ -38,11 +40,13 @@ export default function NoteCard({ noteId, activity, note }: Props) {
                 Details
               </DialogTrigger>
             </div>
-            <DialogContent>
+            <DialogContent className="bg-white text-background">
               <DialogHeader>
-                <DialogTitle>{activity}</DialogTitle>
+                <DialogTitle className=" text-background">
+                  {activity}
+                </DialogTitle>
               </DialogHeader>
-              <div>
+              <div className=" text-background">
                 <p>{note}</p>
               </div>
             </DialogContent>

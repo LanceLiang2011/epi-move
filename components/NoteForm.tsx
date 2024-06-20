@@ -75,12 +75,15 @@ export default function NoteForm({ activities, userid }: Props) {
             <FormItem>
               <FormLabel>Activity</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
+                <FormControl className="bg-white">
                   <SelectTrigger>
-                    <SelectValue placeholder="Select an activity" />
+                    <SelectValue
+                      className=" bg-white"
+                      placeholder="Select an activity"
+                    />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className=" bg-white">
                   {activities.map((activity) => (
                     <SelectItem key={activity.id} value={activity.id}>
                       {activity.name}
@@ -104,7 +107,7 @@ export default function NoteForm({ activities, userid }: Props) {
               <FormControl>
                 <Textarea
                   placeholder="Put your note here"
-                  className="resize-none"
+                  className="resize-none bg-white"
                   {...field}
                 />
               </FormControl>

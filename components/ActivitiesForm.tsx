@@ -66,9 +66,15 @@ export default function ActivitiesForm({ userid }: Props) {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Basketball" {...field} />
+                <Input
+                  className=" bg-white"
+                  placeholder="Basketball"
+                  {...field}
+                />
               </FormControl>
-              <FormDescription>Name of your activity</FormDescription>
+              <FormDescription className="text-gray-800">
+                Name of your activity
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -82,7 +88,7 @@ export default function ActivitiesForm({ userid }: Props) {
               <FormControl>
                 <Textarea
                   placeholder="Describe your activity"
-                  className="resize-none"
+                  className="resize-none bg-white"
                   {...field}
                 />
               </FormControl>

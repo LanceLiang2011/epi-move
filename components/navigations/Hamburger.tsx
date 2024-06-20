@@ -21,13 +21,21 @@ export default function Hamburger() {
         <SheetHeader>
           <SheetTitle>Menu</SheetTitle>
           <br />
-          <SheetDescription>
+          <SheetDescription className=" flex flex-col gap-12">
             <SheetPrimitive.Close asChild>
               <Link
-                className=" font-bold text-lg text-foreground "
+                className=" text-lg font-bold text-foreground "
                 href={`/protected/main/references`}
               >
                 References
+              </Link>
+            </SheetPrimitive.Close>
+            <SheetPrimitive.Close asChild>
+              <Link
+                className=" text-lg font-bold text-foreground "
+                href={`/protected/main/disclaimer`}
+              >
+                Disclaimer
               </Link>
             </SheetPrimitive.Close>
           </SheetDescription>

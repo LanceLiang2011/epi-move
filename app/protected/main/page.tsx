@@ -42,25 +42,15 @@ export default async function MainPage() {
   // TODO : waterfall aync issue. Should improve later.
 
   return (
-    <div className="flex h-full w-full flex-1 flex-col items-start justify-center gap-6 bg-gradient-to-b from-fuchsia-950 to-background p-6">
+    <div className="flex h-full w-full flex-1 flex-col items-start justify-center gap-6 p-6 text-background">
       <div>
-        <h1 className=" text-3xl font-bold">Hi {userdata![0].username},</h1>
-        <h2 className="text-2xl font-semibold">
-          welcome to your profile page!
-        </h2>
-        <div className="mt-4 max-w-[32rem] text-gray-200">
-          <p>Here you can:</p>
-          <ul className="list-disc pl-8">
-            <li>Select an activity that you are interested to explore.</li>
-            <li>
-              Talk about the activity with your doctor during your next clinic
-              visit.
-            </li>
-            <li>
-              Add notes to each of the activity or mark those you like as your
-              favourite.
-            </li>
-          </ul>
+        <h1 className=" text-2xl font-bold">Hi {userdata![0].username},</h1>
+        <h2 className="text-xl font-semibold">welcome to your profile page!</h2>
+        <div className="mt-4 max-w-[32rem]">
+          <p>
+            Here you can add notes to each of the activity or mark those you
+            like as your favourite.
+          </p>
         </div>
         {/* <p className=" text-lg text-gray-200">
           You have {notes?.length ?? 0}{" "}
@@ -68,7 +58,13 @@ export default async function MainPage() {
         </p> */}
       </div>
       <div className=" flex w-full items-center">
-        <h2 className=" text-2xl font-semibold">My Notes</h2>
+        <div>
+          <h2 className=" text-2xl font-semibold">Add your notes</h2>
+          <p>
+            Click on the boxes below to select an activity and add your personal
+            notes.
+          </p>
+        </div>
         <div className=" ml-auto rounded-full bg-primary p-2">
           <MdOutlineEditNote />
         </div>
@@ -88,7 +84,13 @@ export default async function MainPage() {
         </AddDataDialog>
       </div>
       <div className=" flex w-full items-center">
-        <h2 className=" text-2xl font-semibold">My Activities</h2>
+        <div>
+          <h2 className=" text-2xl font-semibold">Saved personal notes</h2>
+          <p>
+            Below you can find the notes you created for each activity you
+            selected.
+          </p>
+        </div>
         <div className=" ml-auto rounded-full bg-primary p-2">
           <MdOutlineSportsGymnastics />
         </div>
@@ -115,8 +117,11 @@ function PlaceHolder() {
   return (
     <Card className="col-span-2 w-full place-items-center place-self-center border-none bg-white/10 text-center text-white shadow-lg">
       <CardHeader className="px-0">
-        <CardTitle className="mb-2 text-xl"> No Current Notes</CardTitle>
-        <CardContent className="text-gray-200">
+        <CardTitle className="mb-2 text-xl text-background">
+          {" "}
+          No Current Notes
+        </CardTitle>
+        <CardContent className="text-background">
           Please create your first Note
         </CardContent>
       </CardHeader>

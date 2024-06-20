@@ -26,20 +26,24 @@ interface Props {
 export default function AddDataDialog({ children, title, description }: Props) {
   return (
     <Dialog>
-      <DialogTrigger className=" flex-1">
-        <Card className="transparent-card">
+      <DialogTrigger className=" flex-1 ">
+        <Card className="transparent-card ">
           <CardHeader>
-            <CardTitle className="mb-2 text-xl">{title}</CardTitle>
-            <CardDescription className="text-gray-200">
+            <CardTitle className="mb-2 text-xl text-background">
+              {title}
+            </CardTitle>
+            <CardDescription className="text-background">
               {description}
             </CardDescription>
           </CardHeader>
         </Card>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className=" bg-white text-background">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <DialogDescription className="text-gray-800">
+            {description}
+          </DialogDescription>
         </DialogHeader>
         {children}
         <Toaster />

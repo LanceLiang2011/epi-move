@@ -293,7 +293,8 @@ const contentsMap: Record<string, string> = {
   
   <ul class="list-inside list-decimal">
       <li>Warm up before hitting the slopes. Focus on areas like your calves, hamstrings, quadriceps, and shoulders to prepare your body for skiing or snowboarding.<span class="citation">31</span></li>
-      <li>Dress warmly to stay comfortable in cold playing conditions and wear appropriate protective gear for safety, particularly helmets.<span class="citation">9</span></li>
+      <li>Dress warmly to stay comfortable in cold playing conditions</li>
+      <li>Wear appropriate protective gear for safety, particularly helmets.<span class="citation">9</span></li>
       <li>Consider using a safety strap when riding the ski lift for added stability.<span class="citation">9</span></li>
       <li>Have a skiing or snowboarding buddy who knows about your epilepsy and what to do in case of emergencies.<span class="citation">32</span></li>
   </ul>

@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
 import { Input } from "@/components/ui/input";
 import { CiSearch } from "react-icons/ci";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface Props {
   title: string;
@@ -9,22 +11,43 @@ interface Props {
 }
 
 export default function Heading({ title, Icon, placeholder = "" }: Props) {
+  const [inputValue, setInputValue] = useState("");
+  const router = useRouter();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSearch = () => {
+    router.push(`/protected/main/activities?keyword=${inputValue}`);
+  };
+
   return (
     <div className="w-full bg-background">
-      <div className="p-4 relative">
-        <Input type="text" placeholder={placeholder} />
+      <div className="relative p-4">
+        <Input
+          type="text"
+          placeholder={placeholder}
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+        />
         <CiSearch
-          className=" absolute right-6 bottom-6"
+          className=" absolute bottom-6 right-6"
           color="white"
           size={24}
         />
       </div>
-      <div className="flex w-full py-6 items-center justify-center bg-background h-42">
-        <div className="flex items-center justify-center w-24 h-24 ml-8 bg-primary rounded-xl">
+      <div className="h-42 flex w-full items-center justify-center bg-background py-6">
+        <div className="ml-8 flex h-24 w-24 items-center justify-center rounded-xl bg-primary">
           {Icon}
         </div>
-        <div className="flex items-center justify-center flex-1">
-          <h2 className="uppercase text-2xl px-16">{title}</h2>
+        <div className="flex flex-1 items-center justify-center">
+          <h2 className="px-16 text-2xl uppercase">{title}</h2>
         </div>
       </div>
     </div>

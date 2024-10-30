@@ -3,7 +3,13 @@ import React from "react";
 import { FiTarget } from "react-icons/fi";
 import ActivitiesGrid from "./ActivitiesGrid";
 
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const keyword = (await searchParams).keyword as string;
+
   return (
     <div>
       <Heading
@@ -11,7 +17,7 @@ export default function Page() {
         placeholder="Search for activities"
         Icon={<FiTarget size={60} />}
       />
-      <ActivitiesGrid />
+      <ActivitiesGrid keyword={keyword} />
     </div>
   );
 }

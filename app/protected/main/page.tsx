@@ -39,7 +39,7 @@ export default async function MainPage() {
     .select("*, activities (name)")
     .eq("user_id", user?.id);
 
-  // TODO : waterfall aync issue. Should improve later.
+  // TODO : waterfall async issue. Should improve later.
 
   return (
     <div className="flex h-full w-full flex-1 flex-col items-start justify-center gap-6 p-6 text-background">
@@ -71,7 +71,7 @@ export default async function MainPage() {
       </div>
       <div className="flex gap-4">
         <AddDataDialog
-          title="New Activiy"
+          title="New Activity"
           description="Crate Your own activity here"
         >
           <ActivitiesForm userid={user?.id ?? ""} />

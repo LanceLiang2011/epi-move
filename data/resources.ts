@@ -1,4 +1,10 @@
-import { Goal, Star, BadgeAlert, type LucideIcon } from "lucide-react";
+import {
+  Goal,
+  Star,
+  BadgeAlert,
+  AlertTriangle,
+  type LucideIcon,
+} from "lucide-react";
 import { SlLocationPin } from "react-icons/sl";
 import type { IconType } from "react-icons";
 
@@ -39,5 +45,13 @@ export const resources: Resource[] = [
     url: "success-stories",
     description: "Be inspired by success stories of individuals with epilepsy",
     Icon: Star,
+  },
+  {
+    name: "Medication Warning",
+    slug: "medication-warning",
+    url: "medication-warning",
+    description:
+      "Important safety guidance on certain anti-seizure medications",
+    Icon: AlertTriangle,
   },
 ];

@@ -64,11 +64,13 @@ export const signUp = async (formData: FormData) => {
     if (createUserError) {
       console.error("Failed to create user profile:", createUserError.message);
       // Optionally handle the failure case, perhaps cleaning up the created auth user
-      return redirect("/?message=Failed to create user profile");
+      return redirect(
+        "/?message=Something went wrong while creating your account",
+      );
     }
   }
 
-  return redirect("/?message=Check email to continue sign in process");
+  return redirect("/?message=Account created. Please log in to continue");
 };
 
 export type NoteFormData = {

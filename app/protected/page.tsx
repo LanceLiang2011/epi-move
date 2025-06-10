@@ -34,7 +34,7 @@ export default function Page() {
         .select("username, visited")
         .eq("id", data.user.id);
       if (!userdata) return;
-      setUser(userdata[0].username);
+      setUser(userdata?.at(0)?.username || "");
 
       await supabase
         .from("users")

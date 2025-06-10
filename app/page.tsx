@@ -24,7 +24,6 @@ export default function Login({
           placeholder="you@example.com"
           autoCapitalize="off"
           required
-          value={"test@test.com"} // TODO: Remove me later
         />
         <label className="text-md" htmlFor="password">
           Password
@@ -36,7 +35,6 @@ export default function Login({
           placeholder="••••••••"
           autoCapitalize="off"
           required
-          value={"123456"} // TODO: Remove me later
         />
         <div className=" mb-2 flex justify-end">
           <text className="cursor-pointer align-text-bottom text-sm font-light hover:text-gray-200 active:text-gray-200">

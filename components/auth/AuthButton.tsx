@@ -1,5 +1,4 @@
 import { createClient } from "@/lib/supabase/server";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function AuthButton() {
@@ -8,6 +7,10 @@ export default async function AuthButton() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  if (!user) {
+    return null; // Don't show anything when not logged in
+  }
 
   const { data: userdata } = await supabase
     .from("users")
@@ -19,24 +22,17 @@ export default async function AuthButton() {
 
     const supabase = createClient();
     await supabase.auth.signOut();
-    return redirect("/");
+    return redirect("/main/activities");
   };
 
-  return user ? (
+  return (
     <div className="flex items-center gap-4">
-      Hey, {userdata?.at(0)?.username || ""}!
+      Hello, {userdata?.at(0)?.username || ""}!
       <form action={signOut}>
         <button className="rounded-md bg-btn-background px-4 py-2 no-underline hover:bg-btn-background-hover">
           Logout
         </button>
       </form>
     </div>
-  ) : (
-    <Link
-      href="/"
-      className="flex rounded-md bg-btn-background px-3 py-2 no-underline hover:bg-btn-background-hover"
-    >
-      Login
-    </Link>
   );
 }

@@ -18,7 +18,7 @@ export const signIn = async (formData: FormData) => {
   });
 
   if (error) {
-    return redirect("/?message=Could not authenticate user");
+    return redirect("/login?message=Could not authenticate user");
   }
 
   return redirect("/protected");
@@ -65,12 +65,12 @@ export const signUp = async (formData: FormData) => {
       console.error("Failed to create user profile:", createUserError.message);
       // Optionally handle the failure case, perhaps cleaning up the created auth user
       return redirect(
-        "/?message=Something went wrong while creating your account",
+        "/login?message=Something went wrong while creating your account",
       );
     }
   }
 
-  return redirect("/?message=Account created. Please log in to continue");
+  return redirect("/login?message=Account created. Please log in to continue");
 };
 
 export type NoteFormData = {
@@ -100,14 +100,14 @@ export async function createNote(data: NoteFormData, userid: string) {
 
   if (error) throw new Error(error.message);
 
-  revalidatePath("/protected/main");
+  revalidatePath("/profile");
 }
 
 export async function deleteNote(data: FormData) {
   const noteId = data.get("note_id");
   const supabase = createClient();
   await supabase.from("notes").delete().eq("id", noteId);
-  revalidatePath("/protected/main");
+  revalidatePath("/profile");
 }
 
 export async function createActivity(data: ActivityFormData, userid: string) {
@@ -120,5 +120,5 @@ export async function createActivity(data: ActivityFormData, userid: string) {
   ]);
 
   if (error) throw new Error(error.message);
-  revalidatePath("/protected/main");
+  revalidatePath("/profile");
 }

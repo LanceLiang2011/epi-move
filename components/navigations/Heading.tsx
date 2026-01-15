@@ -19,7 +19,7 @@ export default function Heading({ title, Icon, placeholder = "" }: Props) {
   };
 
   const handleSearch = () => {
-    router.push(`/protected/main/activities?keyword=${inputValue}`);
+    router.push(`/main/activities?keyword=${inputValue}`);
   };
 
   return (

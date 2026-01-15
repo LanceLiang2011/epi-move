@@ -25,7 +25,23 @@ export default function Hamburger() {
             <SheetPrimitive.Close asChild>
               <Link
                 className=" text-lg font-bold text-foreground "
-                href={`/protected/main/references`}
+                href={`/main/activities`}
+              >
+                Activities
+              </Link>
+            </SheetPrimitive.Close>
+            <SheetPrimitive.Close asChild>
+              <Link
+                className=" text-lg font-bold text-foreground "
+                href={`/main/resources`}
+              >
+                Resources
+              </Link>
+            </SheetPrimitive.Close>
+            <SheetPrimitive.Close asChild>
+              <Link
+                className=" text-lg font-bold text-foreground "
+                href={`/main/references`}
               >
                 References
               </Link>
@@ -33,7 +49,7 @@ export default function Hamburger() {
             <SheetPrimitive.Close asChild>
               <Link
                 className=" text-lg font-bold text-foreground "
-                href={`/protected/main/disclaimer`}
+                href={`/main/disclaimer`}
               >
                 Disclaimer
               </Link>

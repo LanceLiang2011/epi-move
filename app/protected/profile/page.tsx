@@ -47,7 +47,7 @@ export default async function ProfilePage() {
     .eq("user_id", user?.id);
 
   return (
-    <div className="flex h-full w-full flex-1 flex-col items-start justify-center gap-6 p-6 text-background">
+    <div className="flex h-full w-full flex-1 flex-col items-start gap-6 p-6 pt-20 text-background">
       <div>
         <h1 className=" text-2xl font-bold">Hi {userdata![0].username},</h1>
         <h2 className="text-xl font-semibold">welcome to your profile page!</h2>

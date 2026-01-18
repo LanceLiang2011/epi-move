@@ -10,7 +10,10 @@ export default function BottomTabs() {
   const currentRoute = pathname.split("/").at(-1);
   return (
     <div className="flex w-full items-center justify-around bg-background py-4">
-      <Link className=" flex flex-col items-center gap-1" href={`/profile`}>
+      <Link
+        className=" flex flex-col items-center gap-1"
+        href={`/protected/profile`}
+      >
         <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 1.2 }}>
           <CgProfile
             color={currentRoute === "profile" ? "#9561cc" : "white"}

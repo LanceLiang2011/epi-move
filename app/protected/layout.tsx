@@ -15,13 +15,13 @@ export default async function ProtectedLayout({ children }: Props) {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirect("/");
+    return redirect("/login");
   }
 
   return (
-    <div className="h-full w-full flex flex-col">
+    <div className="flex h-full w-full flex-col">
       <TopNav />
-      <div className="relative main-wrapper flex flex-col">{children}</div>
+      <div className="main-wrapper relative flex flex-col">{children}</div>
     </div>
   );
 }

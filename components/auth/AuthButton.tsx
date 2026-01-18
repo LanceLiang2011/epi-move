@@ -22,7 +22,7 @@ export default async function AuthButton() {
 
     const supabase = createClient();
     await supabase.auth.signOut();
-    return redirect("/main/activities");
+    return redirect("/main");
   };
 
   return (

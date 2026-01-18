@@ -100,14 +100,14 @@ export async function createNote(data: NoteFormData, userid: string) {
 
   if (error) throw new Error(error.message);
 
-  revalidatePath("/profile");
+  revalidatePath("/protected/profile");
 }
 
 export async function deleteNote(data: FormData) {
   const noteId = data.get("note_id");
   const supabase = createClient();
   await supabase.from("notes").delete().eq("id", noteId);
-  revalidatePath("/profile");
+  revalidatePath("/protected/profile");
 }
 
 export async function createActivity(data: ActivityFormData, userid: string) {
@@ -120,5 +120,5 @@ export async function createActivity(data: ActivityFormData, userid: string) {
   ]);
 
   if (error) throw new Error(error.message);
-  revalidatePath("/profile");
+  revalidatePath("/protected/profile");
 }

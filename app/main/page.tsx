@@ -1,14 +1,12 @@
 "use client";
 import Logo from "@/components/Logo";
-import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
-function returnPage(page: number, username?: string) {
+function returnPage(page: number) {
   switch (page) {
     case 1: {
-      return <PageOne username={username} />;
+      return <PageOne />;
     }
     case 2: {
       return <PageTwo />;
@@ -20,34 +18,8 @@ function returnPage(page: number, username?: string) {
 }
 
 export default function Page() {
-  const supabase = createClient();
-  const [user, setUser] = useState<string | undefined>(undefined);
   const [page, setPage] = useState<number>(1);
-  const router = useRouter();
 
-  useEffect(() => {
-    async function getUser() {
-      const { data } = await supabase.auth.getUser();
-      if (!data.user) return;
-      const { data: userdata } = await supabase
-        .from("users")
-        .select("username, visited")
-        .eq("id", data.user.id);
-      if (!userdata) return;
-      setUser(userdata?.at(0)?.username || "");
-
-      await supabase
-        .from("users")
-        .update({ visited: true })
-        .eq("id", data.user.id);
-
-      if (userdata[0].visited) {
-        router.push(`/main`);
-      }
-    }
-
-    getUser();
-  }, []);
   return (
     <div className="flex h-full w-full flex-col items-center">
       <div className="">
@@ -57,11 +29,11 @@ export default function Page() {
         <p className=" text-2xl text-primary">Welcome to</p>
         <div className=" text-4xl font-bold text-background">EpiMove</div>
         <div className=" mb-6 w-2/5 border-b-2 border-primary py-2" />
-        {returnPage(page, user)}
+        {returnPage(page)}
         <div className="mt-auto flex justify-between pt-2 font-bold text-background">
-          <Link href={`/main`}>Skip</Link>
+          <Link href={`/main/activities`}>Skip</Link>
           {page === 2 ? (
-            <Link href={`/main`}>Enter</Link>
+            <Link href={`/main/activities`}>Enter</Link>
           ) : (
             <button onClick={() => setPage((p) => p + 1)}>Next</button>
           )}
@@ -71,17 +43,16 @@ export default function Page() {
   );
 }
 
-function PageOne({ username }: { username: string | null | undefined }) {
+function PageOne() {
   return (
     <>
       <p className=" text-background">
-        Hello {username || "Visitor"}, thank you for visiting EpiMove! We
-        created this app to help you explore physical activities that may suit
-        your interests.
+        Hello, thank you for visiting EpiMove! We created this app to help you
+        explore physical activities that may suit your interests.
       </p>
       <p className=" text-background">
         Physical activity is important for your health and well-being. Having
-        epilepsy shouldn’t stop you from enjoying and being active.
+        epilepsy shouldn't stop you from enjoying and being active.
       </p>
     </>
   );

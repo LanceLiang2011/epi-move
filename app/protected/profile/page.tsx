@@ -2,11 +2,11 @@ import React from "react";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import AddDataDialog from "@/app/protected/main/AddDataDialog";
+import AddDataDialog from "./AddDataDialog";
 import NoteForm from "@/components/NoteForm";
 import ActivitiesForm from "@/components/ActivitiesForm";
 import type { ActivityInfo } from "@/data/activities";
-import NoteCard from "@/app/protected/main/NoteCard";
+import NoteCard from "./NoteCard";
 import { MdOutlineEditNote, MdOutlineSportsGymnastics } from "react-icons/md";
 
 export default async function ProfilePage() {

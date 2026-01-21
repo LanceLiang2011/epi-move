@@ -14,6 +14,8 @@ interface Activity extends ActivitySum {
 export interface ActivityInfo {
   id: string;
   name: string;
+  description?: string;
+  created_by?: string;
   created: string;
 }
 

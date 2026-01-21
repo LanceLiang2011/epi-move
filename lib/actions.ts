@@ -116,9 +116,56 @@ export async function createActivity(data: ActivityFormData, userid: string) {
     {
       created_by: userid,
       name: data.name,
+      description: data.description,
     },
   ]);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/profile");
+  revalidatePath("/protected/activities");
+}
+
+export async function updateActivity(
+  activityId: string,
+  data: ActivityFormData,
+) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("activities")
+    .update({
+      name: data.name,
+      description: data.description,
+    })
+    .eq("id", activityId);
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/profile");
+  revalidatePath("/protected/activities");
+}
+
+export async function deleteActivity(activityId: string) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("activities")
+    .delete()
+    .eq("id", activityId);
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/profile");
+  revalidatePath("/protected/activities");
+}
+
+export async function updateNote(noteId: string, noteText: string) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("notes")
+    .update({
+      note: noteText,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", noteId);
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/profile");
+  revalidatePath("/protected/activities");
 }

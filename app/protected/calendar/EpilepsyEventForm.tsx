@@ -39,9 +39,10 @@ const COMMON_TRIGGERS = [
 
 interface Props {
   onSuccess?: () => void;
+  onCancel?: () => void;
 }
 
-export default function EpilepsyEventForm({ onSuccess }: Props) {
+export default function EpilepsyEventForm({ onSuccess, onCancel }: Props) {
   const router = useRouter();
   const [eventDate, setEventDate] = useState(
     new Date().toISOString().slice(0, 16),
@@ -264,6 +265,14 @@ export default function EpilepsyEventForm({ onSuccess }: Props) {
       </div>
 
       <div className="flex justify-end gap-2 pt-4">
+        <Button
+          type="button"
+          onClick={onCancel}
+          disabled={isSubmitting}
+          className="border-0 bg-gray-200 text-gray-800 hover:bg-gray-300"
+        >
+          Cancel
+        </Button>
         <Button
           type="submit"
           disabled={isSubmitting}

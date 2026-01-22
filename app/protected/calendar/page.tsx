@@ -42,7 +42,7 @@ export default async function CalendarPage() {
     .or(`created_by.eq.${user.id},created_by.is.null`);
 
   return (
-    <div className="flex h-full w-full flex-1 flex-col items-start gap-6 p-6 pt-20">
+    <div className="flex h-full w-full flex-1 flex-col items-start gap-4 p-4 pb-24 pt-4">
       <div className="w-full">
         <h1 className="text-2xl font-bold text-background">Health Calendar</h1>
         <p className="mt-2 text-lg text-background">

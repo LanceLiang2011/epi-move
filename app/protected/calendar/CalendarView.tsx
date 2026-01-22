@@ -197,6 +197,7 @@ export default function CalendarView({
               </DialogHeader>
               <EpilepsyEventForm
                 onSuccess={() => setIsEpilepsyDialogOpen(false)}
+                onCancel={() => setIsEpilepsyDialogOpen(false)}
               />
             </DialogContent>
           </Dialog>
@@ -218,6 +219,7 @@ export default function CalendarView({
               <ActivityLogForm
                 activities={activities}
                 onSuccess={() => setIsActivityDialogOpen(false)}
+                onCancel={() => setIsActivityDialogOpen(false)}
               />
             </DialogContent>
           </Dialog>
@@ -236,7 +238,10 @@ export default function CalendarView({
               <DialogHeader>
                 <DialogTitle>Log Daily Health</DialogTitle>
               </DialogHeader>
-              <HealthLogForm onSuccess={() => setIsHealthDialogOpen(false)} />
+              <HealthLogForm
+                onSuccess={() => setIsHealthDialogOpen(false)}
+                onCancel={() => setIsHealthDialogOpen(false)}
+              />
             </DialogContent>
           </Dialog>
         </div>

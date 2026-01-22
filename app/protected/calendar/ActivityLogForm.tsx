@@ -25,9 +25,14 @@ interface Activity {
 interface Props {
   activities: Activity[];
   onSuccess?: () => void;
+  onCancel?: () => void;
 }
 
-export default function ActivityLogForm({ activities, onSuccess }: Props) {
+export default function ActivityLogForm({
+  activities,
+  onSuccess,
+  onCancel,
+}: Props) {
   const router = useRouter();
   const [activityDate, setActivityDate] = useState(
     new Date().toISOString().slice(0, 16),
@@ -157,6 +162,14 @@ export default function ActivityLogForm({ activities, onSuccess }: Props) {
       </div>
 
       <div className="flex justify-end gap-2 pt-4">
+        <Button
+          type="button"
+          onClick={onCancel}
+          disabled={isSubmitting}
+          className="border-0 bg-gray-200 text-gray-800 hover:bg-gray-300"
+        >
+          Cancel
+        </Button>
         <Button
           type="submit"
           disabled={isSubmitting}

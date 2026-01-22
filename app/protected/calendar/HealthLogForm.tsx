@@ -11,9 +11,10 @@ import { toast } from "@/components/ui/use-toast";
 
 interface Props {
   onSuccess?: () => void;
+  onCancel?: () => void;
 }
 
-export default function HealthLogForm({ onSuccess }: Props) {
+export default function HealthLogForm({ onSuccess, onCancel }: Props) {
   const router = useRouter();
   const [logDate, setLogDate] = useState(new Date().toISOString().slice(0, 10));
   const [sleepHours, setSleepHours] = useState("");
@@ -177,6 +178,14 @@ export default function HealthLogForm({ onSuccess }: Props) {
       </div>
 
       <div className="flex justify-end gap-2 pt-4">
+        <Button
+          type="button"
+          onClick={onCancel}
+          disabled={isSubmitting}
+          className="border-0 bg-gray-200 text-gray-800 hover:bg-gray-300"
+        >
+          Cancel
+        </Button>
         <Button
           type="submit"
           disabled={isSubmitting}

@@ -169,3 +169,182 @@ export async function updateNote(noteId: string, noteText: string) {
   revalidatePath("/protected/profile");
   revalidatePath("/protected/activities");
 }
+
+// ===== CALENDAR EVENT ACTIONS =====
+
+// Epilepsy Events
+export async function createEpilepsyEvent(data: {
+  event_date: string;
+  event_type: string;
+  seizure_type?: string;
+  duration_minutes?: number;
+  severity?: number;
+  triggers?: string[];
+  medications_taken?: string[];
+  recovery_time_minutes?: number;
+  notes?: string;
+}) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Not authenticated");
+
+  const { error } = await supabase.from("epilepsy_events").insert({
+    user_id: user.id,
+    ...data,
+  });
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/calendar");
+}
+
+export async function updateEpilepsyEvent(
+  eventId: string,
+  data: {
+    event_date?: string;
+    event_type?: string;
+    seizure_type?: string;
+    duration_minutes?: number;
+    severity?: number;
+    triggers?: string[];
+    medications_taken?: string[];
+    recovery_time_minutes?: number;
+    notes?: string;
+  },
+) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("epilepsy_events")
+    .update({ ...data, updated_at: new Date().toISOString() })
+    .eq("id", eventId);
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/calendar");
+}
+
+export async function deleteEpilepsyEvent(eventId: string) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("epilepsy_events")
+    .delete()
+    .eq("id", eventId);
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/calendar");
+}
+
+// Activity Logs
+export async function createActivityLog(data: {
+  activity_id: string;
+  activity_date: string;
+  duration_minutes: number;
+  intensity?: string;
+  notes?: string;
+}) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Not authenticated");
+
+  const { error } = await supabase.from("activity_logs").insert({
+    user_id: user.id,
+    ...data,
+  });
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/calendar");
+}
+
+export async function updateActivityLog(
+  logId: string,
+  data: {
+    activity_id?: string;
+    activity_date?: string;
+    duration_minutes?: number;
+    intensity?: string;
+    notes?: string;
+  },
+) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("activity_logs")
+    .update({ ...data, updated_at: new Date().toISOString() })
+    .eq("id", logId);
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/calendar");
+}
+
+export async function deleteActivityLog(logId: string) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("activity_logs")
+    .delete()
+    .eq("id", logId);
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/calendar");
+}
+
+// Daily Health Logs
+export async function createDailyHealthLog(data: {
+  log_date: string;
+  sleep_hours?: number;
+  sleep_quality?: number;
+  stress_level?: number;
+  mood?: number;
+  medications_taken?: string[];
+  notes?: string;
+}) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Not authenticated");
+
+  const { error } = await supabase.from("daily_health_logs").insert({
+    user_id: user.id,
+    ...data,
+  });
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/calendar");
+}
+
+export async function updateDailyHealthLog(
+  logId: string,
+  data: {
+    log_date?: string;
+    sleep_hours?: number;
+    sleep_quality?: number;
+    stress_level?: number;
+    mood?: number;
+    medications_taken?: string[];
+    notes?: string;
+  },
+) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("daily_health_logs")
+    .update({ ...data, updated_at: new Date().toISOString() })
+    .eq("id", logId);
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/calendar");
+}
+
+export async function deleteDailyHealthLog(logId: string) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("daily_health_logs")
+    .delete()
+    .eq("id", logId);
+
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/calendar");
+}

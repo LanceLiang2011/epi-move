@@ -20,25 +20,33 @@ export default async function ProfilePage() {
     .select("username, favorite_activities")
     .eq("id", user?.id);
 
+  const username = userdata![0].username;
+
   return (
-    <div className="flex h-full w-full flex-1 flex-col items-start gap-6 p-6 pt-20 text-background">
+    <div className="flex h-full w-full flex-1 flex-col items-start gap-6 p-6 pt-20">
       <div>
-        <h1 className=" text-2xl font-bold">Hi {userdata![0].username},</h1>
-        <h2 className="text-xl font-semibold">Welcome to your profile!</h2>
+        <h1 className="text-3xl font-bold text-gray-900">Hello, {username}!</h1>
+        <h2 className="mt-2 text-lg font-light text-gray-700">
+          Welcome back to EpiMove. Here's your profile information.
+        </h2>
       </div>
 
-      <Card className="w-full max-w-2xl bg-white/10 text-white">
+      <Card className="w-full max-w-2xl bg-white shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl">Profile Information</CardTitle>
+          <CardTitle className="text-2xl text-gray-900">
+            Profile Information
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <p className="text-sm text-gray-300">Username</p>
-            <p className="text-lg font-medium">{userdata![0].username}</p>
+            <p className="text-sm text-gray-600">Username</p>
+            <p className="text-lg font-medium text-gray-900">
+              {userdata![0].username}
+            </p>
           </div>
           <div>
-            <p className="text-sm text-gray-300">Email</p>
-            <p className="text-lg font-medium">{user.email}</p>
+            <p className="text-sm text-gray-600">Email</p>
+            <p className="text-lg font-medium text-gray-900">{user.email}</p>
           </div>
         </CardContent>
       </Card>

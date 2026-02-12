@@ -1,7 +1,9 @@
 import React from "react";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import CalendarView from "./CalendarView";
+import { activitiesWithSlugs } from "@/data/activities";
+import type { ActivityInfo } from "@/data/activities";
+import CalendarTabs from "./CalendarTabs";
 
 export default async function CalendarPage() {
   const supabase = createClient();
@@ -35,11 +37,26 @@ export default async function CalendarPage() {
     .eq("user_id", user.id)
     .order("log_date", { ascending: false });
 
-  // Fetch all activities for the dropdown
-  const { data: allActivities } = await supabase
+  // Fetch user's custom activities
+  const { data: customActivities } = await supabase
     .from("activities")
     .select("*")
-    .or(`created_by.eq.${user.id},created_by.is.null`);
+    .eq("created_by", user.id);
+
+  // Combine pre-defined activities with custom activities
+  const preDefinedActivities: ActivityInfo[] = activitiesWithSlugs.map(
+    (activity) => ({
+      id: activity.slug,
+      name: activity.name,
+      created: new Date().toISOString(),
+      created_by: undefined,
+    }),
+  );
+
+  const allActivities = [
+    ...((customActivities as ActivityInfo[]) || []),
+    ...preDefinedActivities,
+  ];
 
   return (
     <div className="flex h-full w-full flex-1 flex-col items-start gap-4 p-4 pb-24 pt-4">
@@ -50,11 +67,11 @@ export default async function CalendarPage() {
         </p>
       </div>
 
-      <CalendarView
+      <CalendarTabs
         epilepsyEvents={epilepsyEvents || []}
         activityLogs={activityLogs || []}
         healthLogs={healthLogs || []}
-        activities={allActivities || []}
+        activities={allActivities}
         userId={user.id}
       />
     </div>

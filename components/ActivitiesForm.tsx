@@ -31,11 +31,7 @@ const formSchema = z.object({
   }),
 });
 
-interface Props {
-  userid: string;
-}
-
-export default function ActivitiesForm({ userid }: Props) {
+export default function ActivitiesForm() {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,7 +40,7 @@ export default function ActivitiesForm({ userid }: Props) {
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     startTransition(async () => {
-      await createActivity(data, userid);
+      await createActivity(data);
       toast({
         title: "Activity created successfully",
         action: (

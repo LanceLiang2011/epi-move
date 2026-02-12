@@ -110,11 +110,17 @@ export async function deleteNote(data: FormData) {
   revalidatePath("/protected/profile");
 }
 
-export async function createActivity(data: ActivityFormData, userid: string) {
+export async function createActivity(data: ActivityFormData) {
   const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Not authenticated");
+
   const { error } = await supabase.from("activities").insert([
     {
-      created_by: userid,
+      created_by: user.id,
       name: data.name,
       description: data.description,
     },
@@ -123,6 +129,7 @@ export async function createActivity(data: ActivityFormData, userid: string) {
   if (error) throw new Error(error.message);
   revalidatePath("/protected/profile");
   revalidatePath("/protected/activities");
+  revalidatePath("/protected/calendar");
 }
 
 export async function updateActivity(

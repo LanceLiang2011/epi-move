@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { motion } from "framer-motion";
 import { CgProfile } from "react-icons/cg";
-import { FiTarget, FiCalendar } from "react-icons/fi";
+import { FiCalendar } from "react-icons/fi";
 
 export default function BottomTabs() {
   const pathname = usePathname();
@@ -22,19 +22,6 @@ export default function BottomTabs() {
           />
         </motion.div>
         <div className=" text-xs font-light">Profile</div>
-      </Link>
-
-      <Link
-        className=" flex flex-col items-center gap-1"
-        href={`/protected/activities`}
-      >
-        <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 1.2 }}>
-          <FiTarget
-            color={currentRoute === "activities" ? "#9561cc" : "white"}
-            size={36}
-          />
-        </motion.div>
-        <div className=" text-xs font-light">Activities</div>
       </Link>
 
       <Link

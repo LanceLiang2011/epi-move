@@ -5,19 +5,7 @@ import { Calendar, dateFnsLocalizer, View } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
 import { enUS } from "date-fns/locale";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { MdAdd } from "react-icons/md";
-import EpilepsyEventForm from "./EpilepsyEventForm";
-import ActivityLogForm from "./ActivityLogForm";
-import HealthLogForm from "./HealthLogForm";
 import EventDetailsDialog from "./EventDetailsDialog";
 
 const locales = {
@@ -101,9 +89,6 @@ export default function CalendarView({
     null,
   );
   const [isEventDetailsOpen, setIsEventDetailsOpen] = useState(false);
-  const [isEpilepsyDialogOpen, setIsEpilepsyDialogOpen] = useState(false);
-  const [isActivityDialogOpen, setIsActivityDialogOpen] = useState(false);
-  const [isHealthDialogOpen, setIsHealthDialogOpen] = useState(false);
 
   // Convert events to calendar format
   const events: CalendarEvent[] = useMemo(() => {
@@ -178,91 +163,6 @@ export default function CalendarView({
 
   return (
     <div className="w-full space-y-4">
-      {/* Action Buttons */}
-      <Card className="p-4">
-        <div className="flex flex-wrap gap-2">
-          <Dialog
-            open={isEpilepsyDialogOpen}
-            onOpenChange={setIsEpilepsyDialogOpen}
-          >
-            <DialogTrigger asChild>
-              <Button className="bg-red-500 hover:bg-red-600">
-                <MdAdd className="mr-2 h-4 w-4" />
-                Log Epilepsy Event
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-h-[90vh] overflow-y-auto bg-white">
-              <DialogHeader>
-                <DialogTitle>Log Epilepsy Event</DialogTitle>
-              </DialogHeader>
-              <EpilepsyEventForm
-                onSuccess={() => setIsEpilepsyDialogOpen(false)}
-                onCancel={() => setIsEpilepsyDialogOpen(false)}
-              />
-            </DialogContent>
-          </Dialog>
-
-          <Dialog
-            open={isActivityDialogOpen}
-            onOpenChange={setIsActivityDialogOpen}
-          >
-            <DialogTrigger asChild>
-              <Button className="bg-green-500 hover:bg-green-600">
-                <MdAdd className="mr-2 h-4 w-4" />
-                Log Activity
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-h-[90vh] overflow-y-auto bg-white">
-              <DialogHeader>
-                <DialogTitle>Log Physical Activity</DialogTitle>
-              </DialogHeader>
-              <ActivityLogForm
-                activities={activities}
-                onSuccess={() => setIsActivityDialogOpen(false)}
-                onCancel={() => setIsActivityDialogOpen(false)}
-              />
-            </DialogContent>
-          </Dialog>
-
-          <Dialog
-            open={isHealthDialogOpen}
-            onOpenChange={setIsHealthDialogOpen}
-          >
-            <DialogTrigger asChild>
-              <Button className="bg-blue-500 hover:bg-blue-600">
-                <MdAdd className="mr-2 h-4 w-4" />
-                Log Daily Health
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-h-[90vh] overflow-y-auto bg-white">
-              <DialogHeader>
-                <DialogTitle>Log Daily Health</DialogTitle>
-              </DialogHeader>
-              <HealthLogForm
-                onSuccess={() => setIsHealthDialogOpen(false)}
-                onCancel={() => setIsHealthDialogOpen(false)}
-              />
-            </DialogContent>
-          </Dialog>
-        </div>
-
-        {/* Legend */}
-        <div className="mt-4 flex flex-wrap gap-4 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="h-4 w-4 rounded bg-red-500"></div>
-            <span>Epilepsy Events</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="h-4 w-4 rounded bg-green-500"></div>
-            <span>Activities</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="h-4 w-4 rounded bg-blue-500"></div>
-            <span>Health Logs</span>
-          </div>
-        </div>
-      </Card>
-
       {/* Calendar */}
       <Card className="p-4">
         <div style={{ height: "600px" }}>

@@ -44,9 +44,10 @@ export default function ActivityLogForm({
   onActivitiesUpdate,
 }: Props) {
   const router = useRouter();
-  const [activityDate, setActivityDate] = useState(
-    new Date().toISOString().slice(0, 16),
-  );
+  const [activityDate, setActivityDate] = useState(() => {
+    const d = new Date();
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+  });
   const [activityId, setActivityId] = useState("");
   const [duration, setDuration] = useState("");
   const [intensity, setIntensity] = useState("moderate");
@@ -75,7 +76,7 @@ export default function ActivityLogForm({
     try {
       await createActivityLog({
         activity_id: activityId,
-        activity_date: new Date(activityDate).toISOString(),
+        activity_date: activityDate,
         duration_minutes: parseInt(duration),
         intensity: intensity,
         notes: notes.trim() || undefined,

@@ -10,13 +10,17 @@ import { createDailyHealthLog } from "@/lib/actions";
 import { toast } from "@/components/ui/use-toast";
 
 interface Props {
+  healthLogs: any[];
   onSuccess?: () => void;
   onCancel?: () => void;
 }
 
-export default function HealthLogForm({ onSuccess, onCancel }: Props) {
+export default function HealthLogForm({ healthLogs, onSuccess, onCancel }: Props) {
   const router = useRouter();
-  const [logDate, setLogDate] = useState(new Date().toISOString().slice(0, 10));
+  const [logDate, setLogDate] = useState(() => {
+    const d = new Date();
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  });
   const [sleepHours, setSleepHours] = useState("");
   const [sleepQuality, setSleepQuality] = useState("3");
   const [stressLevel, setStressLevel] = useState("3");
@@ -24,9 +28,26 @@ export default function HealthLogForm({ onSuccess, onCancel }: Props) {
   const [medications, setMedications] = useState("");
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+
+    if (!logDate) {
+      setError("Please select a date.");
+      return;
+    }
+
+    const isDuplicate = healthLogs?.some(
+      (log) => log.log_date === logDate || log.log_date.split("T")[0] === logDate
+    );
+
+    if (isDuplicate) {
+      setError("A health log already exists for this date.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -177,6 +198,8 @@ export default function HealthLogForm({ onSuccess, onCancel }: Props) {
         />
       </div>
 
+      {error && <div className="text-red-500 text-sm font-medium">{error}</div>}
+      
       <div className="flex justify-end gap-2 pt-4">
         <Button
           type="button"

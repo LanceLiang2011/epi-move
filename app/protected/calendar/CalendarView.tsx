@@ -92,9 +92,20 @@ export default function CalendarView({
 
   // Convert events to calendar format
   const events: CalendarEvent[] = useMemo(() => {
+    const parseLocal = (dateString: string) => {
+      if (!dateString) return new Date();
+      let str = dateString;
+      if (str.includes("T")) {
+        str = str.endsWith("Z") ? str.slice(0, -1) : str;
+      } else {
+        str = str + "T00:00:00";
+      }
+      return new Date(str);
+    };
+
     const epilepsyCalendarEvents: CalendarEvent[] = epilepsyEvents.map(
       (event) => {
-        const eventDate = new Date(event.event_date);
+        const eventDate = parseLocal(event.event_date);
         return {
           id: event.id,
           title: `🔴 ${event.event_type === "seizure" ? "Seizure" : event.event_type}${event.seizure_type ? ` (${event.seizure_type})` : ""}`,
@@ -107,7 +118,7 @@ export default function CalendarView({
     );
 
     const activityCalendarEvents: CalendarEvent[] = activityLogs.map((log) => {
-      const logDate = new Date(log.activity_date);
+      const logDate = parseLocal(log.activity_date);
       const activity = activities.find((a) => a.id === log.activity_id);
       return {
         id: log.id,
@@ -120,7 +131,7 @@ export default function CalendarView({
     });
 
     const healthCalendarEvents: CalendarEvent[] = healthLogs.map((log) => {
-      const logDate = new Date(log.log_date);
+      const logDate = parseLocal(log.log_date);
       return {
         id: log.id,
         title: `💚 Health Log`,

@@ -115,7 +115,7 @@ export default function CalendarTabs({
               onOpenChange={setIsEpilepsyDialogOpen}
             >
               <DialogTrigger asChild>
-                <Button className="bg-red-500 hover:bg-red-600">
+                <Button className="bg-red-500 text-white hover:bg-red-600 hover:text-white">
                   <MdAdd className="mr-2 h-4 w-4" />
                   Log Epilepsy Event
                 </Button>
@@ -136,7 +136,7 @@ export default function CalendarTabs({
               onOpenChange={setIsActivityDialogOpen}
             >
               <DialogTrigger asChild>
-                <Button className="bg-green-500 hover:bg-green-600">
+                <Button className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
                   <MdAdd className="mr-2 h-4 w-4" />
                   Log Activity
                 </Button>
@@ -161,7 +161,7 @@ export default function CalendarTabs({
               onOpenChange={setIsHealthDialogOpen}
             >
               <DialogTrigger asChild>
-                <Button className="bg-blue-500 hover:bg-blue-600">
+                <Button className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
                   <MdAdd className="mr-2 h-4 w-4" />
                   Log Daily Health
                 </Button>
@@ -171,6 +171,7 @@ export default function CalendarTabs({
                   <DialogTitle>Log Daily Health</DialogTitle>
                 </DialogHeader>
                 <HealthLogForm
+                  healthLogs={healthLogs}
                   onSuccess={() => setIsHealthDialogOpen(false)}
                   onCancel={() => setIsHealthDialogOpen(false)}
                 />

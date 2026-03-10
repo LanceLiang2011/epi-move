@@ -44,9 +44,10 @@ interface Props {
 
 export default function EpilepsyEventForm({ onSuccess, onCancel }: Props) {
   const router = useRouter();
-  const [eventDate, setEventDate] = useState(
-    new Date().toISOString().slice(0, 16),
-  );
+  const [eventDate, setEventDate] = useState(() => {
+    const d = new Date();
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+  });
   const [eventType, setEventType] = useState("seizure");
   const [seizureType, setSeizureType] = useState("");
   const [duration, setDuration] = useState("");
@@ -77,7 +78,7 @@ export default function EpilepsyEventForm({ onSuccess, onCancel }: Props) {
       }
 
       await createEpilepsyEvent({
-        event_date: new Date(eventDate).toISOString(),
+        event_date: eventDate,
         event_type: eventType,
         seizure_type: seizureType || undefined,
         duration_minutes: duration ? parseInt(duration) : undefined,

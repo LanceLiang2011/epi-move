@@ -3,6 +3,11 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { FaQuestionCircle, FaUsers, FaUser } from "react-icons/fa";
 
+export const metadata = {
+  title: "Information",
+  description: "General safety tips and best practices.",
+};
+
 export default function InformationPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-12 p-6 pb-24">
@@ -36,7 +41,7 @@ export default function InformationPage() {
       </section>
 
       <section className="grid gap-6 pt-6 md:grid-cols-3">
-        <Link href="/information/questions" className="block appearance-none transition-transform hover:-translate-y-1">
+        <Link href="/main/information/questions" className="block appearance-none transition-transform hover:-translate-y-1">
           <Card className="h-full border border-gray-200 bg-white transition-shadow hover:shadow-lg cursor-pointer">
             <CardHeader className="pb-3 text-center">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
@@ -52,7 +57,7 @@ export default function InformationPage() {
           </Card>
         </Link>
         
-        <Link href="/information/group-activities" className="block appearance-none transition-transform hover:-translate-y-1">
+        <Link href="/main/information/group-activities" className="block appearance-none transition-transform hover:-translate-y-1">
           <Card className="h-full border border-gray-200 bg-white transition-shadow hover:shadow-lg cursor-pointer">
             <CardHeader className="pb-3 text-center">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-500/10">
@@ -68,7 +73,7 @@ export default function InformationPage() {
           </Card>
         </Link>
 
-        <Link href="/information/solo-activities" className="block appearance-none transition-transform hover:-translate-y-1">
+        <Link href="/main/information/solo-activities" className="block appearance-none transition-transform hover:-translate-y-1">
           <Card className="h-full border border-gray-200 bg-white transition-shadow hover:shadow-lg cursor-pointer">
             <CardHeader className="pb-3 text-center">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/10">

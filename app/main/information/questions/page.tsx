@@ -7,7 +7,7 @@ export default function QuestionsPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-8 p-6 pb-24">
       <Link 
-        href="/information" 
+        href="/main/information" 
         className="inline-flex items-center text-primary hover:text-primary/80 transition-colors font-medium"
       >
         <MdArrowBack className="mr-2 h-5 w-5" />

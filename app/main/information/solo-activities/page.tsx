@@ -7,7 +7,7 @@ export default function SoloActivitiesPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-8 p-6 pb-24">
       <Link 
-        href="/information" 
+        href="/main/information" 
         className="inline-flex items-center text-amber-600 hover:text-amber-700 transition-colors font-medium"
       >
         <MdArrowBack className="mr-2 h-5 w-5" />

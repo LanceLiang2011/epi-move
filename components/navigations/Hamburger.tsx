@@ -25,7 +25,7 @@ export default function Hamburger() {
             <SheetPrimitive.Close asChild>
               <Link
                 className=" text-lg font-bold text-foreground "
-                href={`/information`}
+                href={`/main/information`}
               >
                 Information
               </Link>

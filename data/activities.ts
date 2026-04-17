@@ -103,6 +103,29 @@ export const activitiesWithSlugs: ActivitySum[] = [
   },
 ];
 
+export const groupSlugs: Slugs[] = [
+  "baseball",
+  "basketball",
+  "football",
+  "lacrosse",
+  "rowing",
+  "volleyball",
+  "wrestling",
+];
+
+export const soloSlugs: Slugs[] = [
+  "online-activities",
+  "cycling",
+  "hiking",
+  "martial-arts",
+  "rock-climbing",
+  "roller-skating",
+  "running",
+  "skiing",
+  "swimming",
+  "travel",
+];
+
 const contentsMap: Record<string, string> = {
   "online-activities": `<h3 class="font-bold">Safety Tips<span class="citation">6</span></h3>
   

@@ -1,5 +1,5 @@
 import React from "react";
-import ActivityCard from "./ActivityCard";
+import ActivityCard from "@/components/ActivityCard";
 import { activitiesWithSlugs, type Slugs } from "@/data/activities";
 
 export default function ActivitiesGrid({

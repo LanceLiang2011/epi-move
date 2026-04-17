@@ -2,8 +2,14 @@ import React from "react";
 import Link from "next/link";
 import { MdArrowBack } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import ActivityCard from "@/components/ActivityCard";
+import { activitiesWithSlugs, soloSlugs } from "@/data/activities";
 
 export default function SoloActivitiesPage() {
+  const soloActivities = activitiesWithSlugs.filter((activity) =>
+    soloSlugs.includes(activity.slug),
+  );
+
   return (
     <div className="mx-auto max-w-4xl space-y-8 p-6 pb-24">
       <Link 
@@ -45,6 +51,19 @@ export default function SoloActivitiesPage() {
                   <strong>Stay Visible & Accessible:</strong> Prefer established trails, well-lit areas, and paths where help is relatively easy to reach if necessary. 
               </li>
           </ul>
+        </div>
+        
+        <h3 className="mt-12 mb-6 text-2xl font-bold text-gray-900">Explore Solo Activities</h3>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+          {soloActivities.map((activity) => (
+            <ActivityCard
+              key={activity.url}
+              name={activity.name}
+              slug={activity.slug}
+              url={activity.url}
+              href={activity.slug}
+            />
+          ))}
         </div>
       </div>
     </div>

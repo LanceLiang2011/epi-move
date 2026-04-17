@@ -2,8 +2,14 @@ import React from "react";
 import Link from "next/link";
 import { MdArrowBack } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
+import ActivityCard from "@/components/ActivityCard";
+import { activitiesWithSlugs, groupSlugs } from "@/data/activities";
 
 export default function GroupActivitiesPage() {
+  const groupActivities = activitiesWithSlugs.filter((activity) =>
+    groupSlugs.includes(activity.slug),
+  );
+
   return (
     <div className="mx-auto max-w-4xl space-y-8 p-6 pb-24">
       <Link 
@@ -48,6 +54,19 @@ export default function GroupActivitiesPage() {
                   Consider the heat and how your seizures are affected by higher temperatures. It might be best to avoid intense group activities on especially warm days.
               </li>
           </ul>
+        </div>
+        
+        <h3 className="mt-12 mb-6 text-2xl font-bold text-gray-900">Explore Group Activities</h3>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+          {groupActivities.map((activity) => (
+            <ActivityCard
+              key={activity.url}
+              name={activity.name}
+              slug={activity.slug}
+              url={activity.url}
+              href={activity.slug}
+            />
+          ))}
         </div>
       </div>
     </div>

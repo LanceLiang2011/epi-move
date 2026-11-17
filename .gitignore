@@ -40,3 +40,6 @@ next-env.d.ts
 /.next-test/
 /test-results/
 /playwright-report/
+
+# Supabase CLI cache
+/supabase/.temp/

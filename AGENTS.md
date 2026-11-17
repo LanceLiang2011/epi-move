@@ -8,6 +8,8 @@ For UI work, read `.agents/skills/epi-move-ui/SKILL.md`. For table contracts and
 
 ## Runtime and commands
 
+- Node.js **26.x**, declared in `package.json` and `.nvmrc`. Vercel uses the package engine requirement over the dashboard setting; do not restore the retired Node.js 20 setting.
+
 - Next.js **15.5.29**, App Router, TypeScript strict mode; React **18.2** dependency (Next App Router uses its bundled React runtime). Request APIs, server Supabase clients, route params, and search params are asynchronous.
 - Tailwind **3**, Radix/shadcn-style components, Geist Sans, react-icons/lucide, framer-motion, react-big-calendar with date-fns 4.
 - Supabase SSR **0.12.7**, supabase-js **2.119.0**. Keep these and Next pinned; commit `package-lock.json`.

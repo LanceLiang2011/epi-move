@@ -39,3 +39,7 @@ Supabase security advisors still report [leaked-password protection disabled](ht
 Legacy note creation accepts database activity UUIDs, not static activity slugs. Its UI is currently disconnected from the simplified profile. Favorites, password reset, and phone/social auth are not complete product flows. There is no complete database baseline in version control. These are documented for future work rather than represented as working functionality.
 
 Vercel deployment monitoring initially returned a team-scope authorization error. GitHub main remains the authorized deployment mechanism; confirm Vercel's build outcome separately if team access is unavailable.
+
+## Deployment runtime correction
+
+The first deployment failed before compiling because the Vercel project still selected the discontinued Node.js 20.x runtime. The repository now declares `engines.node: "26.x"` and `.nvmrc` for consistent runtime selection. Vercel documents that the package engine overrides the dashboard selection: https://vercel.com/docs/functions/runtimes/node-js/node-js-versions#version-overrides-in-packagejson

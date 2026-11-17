@@ -4,6 +4,8 @@ A mobile-first web app for epilepsy information, physical activity guidance, and
 
 ## Development
 
+Use Node.js 26 (`nvm use` reads `.nvmrc`). `package.json` pins the runtime major for Vercel deployments.
+
 ```sh
 npm ci
 cp .env.example .env.local

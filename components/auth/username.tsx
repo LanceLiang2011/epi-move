@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 type Props = ComponentProps<"span">;
 
 export default async function Username({ ...rest }: Props) {
-  const supabse = createClient();
+  const supabse = await createClient();
 
   const {
     data: { user },

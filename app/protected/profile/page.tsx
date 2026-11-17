@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function ProfilePage() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },
@@ -18,9 +18,10 @@ export default async function ProfilePage() {
   const { data: userdata } = await supabase
     .from("users")
     .select("username, favorite_activities")
-    .eq("id", user?.id);
+    .eq("id", user.id)
+    .maybeSingle();
 
-  const username = userdata![0].username;
+  const username = userdata?.username || user.user_metadata?.username || "User";
 
   return (
     <div className="flex h-full w-full flex-1 flex-col items-start gap-6 p-6 pt-20">
@@ -41,7 +42,7 @@ export default async function ProfilePage() {
           <div>
             <p className="text-sm text-gray-600">Username</p>
             <p className="text-lg font-medium text-gray-900">
-              {userdata![0].username}
+              {username}
             </p>
           </div>
           <div>

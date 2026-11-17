@@ -1,9 +1,11 @@
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import React from "react";
 import { activities, activitiesWithSlugs } from "@/data/activities";
 
-export default function Page({ params }: { params: { slug: string } }) {
-  const activity = activities[params.slug];
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const activity = activities[(await params).slug];
+  if (!activity) notFound();
   return (
     <div className=" w-full">
       <div className=" sticky top-0 z-0 w-full">
@@ -32,7 +34,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           {activity.videos && (
             <div className="flex flex-col items-center gap-4 py-6">
               {activity.videos.map((v, i) => (
-                <div dangerouslySetInnerHTML={{ __html: v }} />
+                <div key={i} className="w-full [&_iframe]:max-w-full" dangerouslySetInnerHTML={{ __html: v }} />
               ))}
             </div>
           )}

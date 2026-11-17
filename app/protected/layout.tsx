@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default async function ProtectedLayout({ children }: Props) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },

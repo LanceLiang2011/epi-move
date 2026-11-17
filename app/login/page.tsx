@@ -6,11 +6,12 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
-export default function Login({
+export default async function Login({
   searchParams,
 }: {
-  searchParams: { message: string };
+  searchParams: Promise<{ message?: string }>;
 }) {
+  const params = await searchParams;
   return (
     <div className="flex w-full flex-1 flex-col justify-center gap-2 px-8 sm:max-w-md">
       <form className="flex w-full flex-1 flex-col justify-center gap-2 text-foreground animate-in">
@@ -20,6 +21,9 @@ export default function Login({
         </label>
         <input
           className="mb-6 rounded-md border bg-inherit px-4 py-2"
+          id="email"
+          type="email"
+          autoComplete="email"
           name="email"
           placeholder="you@example.com"
           autoCapitalize="off"
@@ -31,6 +35,8 @@ export default function Login({
         <input
           className="mb-6 rounded-md border bg-inherit px-4 py-2"
           type="password"
+          id="password"
+          autoComplete="current-password"
           name="password"
           placeholder="••••••••"
           autoCapitalize="off"
@@ -48,9 +54,9 @@ export default function Login({
         >
           Log In
         </SubmitButton>
-        {searchParams?.message && (
+        {params?.message && (
           <p className="mt-4 bg-foreground/10 p-4 text-center text-foreground">
-            {searchParams.message}
+            {params.message}
           </p>
         )}
       </form>

@@ -8,9 +8,10 @@ interface Props {
   title: string;
   Icon: React.ReactNode;
   placeholder?: string;
+  searchHref?: string;
 }
 
-export default function Heading({ title, Icon, placeholder = "" }: Props) {
+export default function Heading({ title, Icon, placeholder = "", searchHref = "/main/activities" }: Props) {
   const [inputValue, setInputValue] = useState("");
   const router = useRouter();
 
@@ -19,13 +20,14 @@ export default function Heading({ title, Icon, placeholder = "" }: Props) {
   };
 
   const handleSearch = () => {
-    router.push(`/main/activities?keyword=${inputValue}`);
+    router.push(`${searchHref}?keyword=${encodeURIComponent(inputValue.trim())}`);
   };
 
   return (
     <div className="w-full bg-background">
       <div className="relative p-4">
         <Input
+          aria-label={placeholder || "Search activities"}
           type="text"
           placeholder={placeholder}
           value={inputValue}
@@ -37,17 +39,17 @@ export default function Heading({ title, Icon, placeholder = "" }: Props) {
           }}
         />
         <CiSearch
-          className=" absolute bottom-6 right-6"
-          color="white"
+          className="pointer-events-none absolute bottom-6 right-6"
+          color="#32102d"
           size={24}
         />
       </div>
       <div className="h-42 flex w-full items-center justify-center bg-background py-6">
-        <div className="ml-8 flex h-24 w-24 items-center justify-center rounded-xl bg-primary">
+        <div className="ml-4 flex h-20 w-20 shrink-0 sm:ml-8 sm:h-24 sm:w-24 items-center justify-center rounded-xl bg-primary">
           {Icon}
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <h2 className="px-16 text-2xl uppercase">{title}</h2>
+          <h2 className="px-4 text-xl uppercase sm:px-8 sm:text-2xl">{title}</h2>
         </div>
       </div>
     </div>

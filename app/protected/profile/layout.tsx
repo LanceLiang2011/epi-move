@@ -8,7 +8,7 @@ interface Props {
 export default function Layout({ children }: Props) {
   return (
     <>
-      <div className=" h-full overflow-auto bg-white">{children}</div>
+      <div className=" min-h-0 flex-1 overflow-auto bg-white text-card-foreground">{children}</div>
       <BottomTabs />
     </>
   );

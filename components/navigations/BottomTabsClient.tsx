@@ -16,7 +16,7 @@ export default function BottomTabsClient({ username }: Props) {
   const currentRoute = pathname.split("/").at(-1);
 
   return (
-    <div className="flex w-full items-center justify-around bg-background py-4">
+    <div className="flex w-full items-center justify-around shrink-0 bg-background py-4 text-foreground">
       <Link
         className=" flex flex-col items-center gap-1"
         href={`/protected/profile`}

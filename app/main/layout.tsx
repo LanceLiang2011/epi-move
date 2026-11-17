@@ -11,7 +11,7 @@ export default function Layout({ children }: Props) {
     <div className="flex h-full w-full flex-col">
       <TopNav />
       <div className="main-wrapper relative flex flex-col">
-        <div className=" h-full overflow-auto bg-white">{children}</div>
+        <div className=" min-h-0 flex-1 overflow-auto bg-white text-card-foreground">{children}</div>
         <BottomTabs />
       </div>
     </div>

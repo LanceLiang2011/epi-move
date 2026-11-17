@@ -78,9 +78,9 @@ export default function EpilepsyEventForm({ onSuccess, onCancel }: Props) {
       }
 
       await createEpilepsyEvent({
-        event_date: eventDate,
+        event_date: new Date(eventDate).toISOString(),
         event_type: eventType,
-        seizure_type: seizureType || undefined,
+        seizure_type: eventType === "seizure" ? seizureType || undefined : undefined,
         duration_minutes: duration ? parseInt(duration) : undefined,
         severity: parseInt(severity),
         triggers: allTriggers.length > 0 ? allTriggers : undefined,
@@ -129,7 +129,7 @@ export default function EpilepsyEventForm({ onSuccess, onCancel }: Props) {
           Event Type *
         </Label>
         <Select value={eventType} onValueChange={setEventType}>
-          <SelectTrigger className="bg-white text-gray-900">
+          <SelectTrigger id="eventType" className="bg-white text-gray-900">
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="bg-white">
@@ -148,7 +148,7 @@ export default function EpilepsyEventForm({ onSuccess, onCancel }: Props) {
             Seizure Type
           </Label>
           <Select value={seizureType} onValueChange={setSeizureType}>
-            <SelectTrigger className="bg-white text-gray-900">
+            <SelectTrigger id="seizureType" className="bg-white text-gray-900">
               <SelectValue placeholder="Select seizure type" />
             </SelectTrigger>
             <SelectContent className="bg-white">
@@ -208,6 +208,7 @@ export default function EpilepsyEventForm({ onSuccess, onCancel }: Props) {
               key={trigger}
               type="button"
               variant={triggers.includes(trigger) ? "default" : "outline"}
+              aria-pressed={triggers.includes(trigger)}
               size="sm"
               onClick={() => handleTriggerToggle(trigger)}
             >
@@ -216,6 +217,7 @@ export default function EpilepsyEventForm({ onSuccess, onCancel }: Props) {
           ))}
         </div>
         <Input
+          aria-label="Custom trigger"
           placeholder="Add custom trigger"
           value={customTrigger}
           onChange={(e) => setCustomTrigger(e.target.value)}

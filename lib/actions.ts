@@ -1,5 +1,6 @@
 "use server";
 
+import { ensureUserProfile } from "@/lib/auth/profile";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
@@ -8,11 +9,14 @@ import { revalidatePath } from "next/cache";
 export const signIn = async (formData: FormData) => {
   "use server";
 
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  const supabase = createClient();
+  const email = String(formData.get("email") || "").trim();
+  const password = String(formData.get("password") || "");
+  const supabase = await createClient();
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
@@ -21,56 +25,66 @@ export const signIn = async (formData: FormData) => {
     return redirect("/login?message=Could not authenticate user");
   }
 
+  if (user) {
+    try {
+      await ensureUserProfile(supabase, user);
+    } catch {
+      return redirect(
+        "/login?message=Unable to prepare your profile. Please try again.",
+      );
+    }
+  }
+  revalidatePath("/", "layout");
   return redirect("/protected/profile");
 };
 
 export const signUp = async (formData: FormData) => {
   "use server";
 
-  const origin = headers().get("origin");
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  const username = formData.get("username") as string;
-  const supabase = createClient();
+  const origin = (await headers()).get("origin");
+  const email = String(formData.get("email") || "").trim();
+  const password = String(formData.get("password") || "");
+  const username = String(formData.get("username") || "").trim();
+  if (!username || username.length > 100 || !email || password.length < 6) {
+    return redirect(
+      "/signup/email?message=Enter your name, email, and a password of at least 6 characters.",
+    );
+  }
+  const supabase = await createClient();
 
   const {
-    data: { user },
+    data: { user, session },
     error,
   } = await supabase.auth.signUp({
     email,
     password,
     options: {
       emailRedirectTo: `${origin}/auth/callback`,
+      data: { username: username.trim() },
     },
   });
 
   if (error) {
-    return redirect("/?message=Could not authenticate user");
+    return redirect(
+      "/signup/email?message=Unable to create your account. Please check your details and try again.",
+    );
   }
 
-  // Check if the user object is returned and has an id
-  if (user && user.id) {
-    // Create a new record in the custom users table
-    const { data, error: createUserError } = await supabase
-      .from("users")
-      .insert([
-        {
-          id: user.id, // Use the UID from the Auth system
-          username: username,
-          email: email, // Optional: Store email also in your users table if needed
-        },
-      ]);
-
-    if (createUserError) {
-      console.error("Failed to create user profile:", createUserError.message);
-      // Optionally handle the failure case, perhaps cleaning up the created auth user
+  if (user && session) {
+    try {
+      await ensureUserProfile(supabase, user);
+    } catch {
       return redirect(
-        "/login?message=Something went wrong while creating your account",
+        "/login?message=Your account was created. Please log in to finish preparing your profile.",
       );
     }
+    revalidatePath("/", "layout");
+    return redirect("/protected/profile");
   }
 
-  return redirect("/login?message=Account created. Please log in to continue");
+  return redirect(
+    "/login?message=Check your email to confirm your account. The confirmation link will sign you in.",
+  );
 };
 
 export type NoteFormData = {
@@ -87,12 +101,16 @@ export type DeleteNoteFormData = {
   note_id: string;
 };
 
-export async function createNote(data: NoteFormData, userid: string) {
-  const supabase = createClient();
+export async function createNote(data: NoteFormData, _userid?: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
 
-  const { data: responseData, error } = await supabase.from("notes").insert([
+  const { error } = await supabase.from("notes").insert([
     {
-      user_id: userid,
+      user_id: user.id,
       activity_id: data.activity,
       note: data.note,
     },
@@ -101,17 +119,28 @@ export async function createNote(data: NoteFormData, userid: string) {
   if (error) throw new Error(error.message);
 
   revalidatePath("/protected/profile");
+  revalidatePath("/protected/activities");
 }
 
 export async function deleteNote(data: FormData) {
   const noteId = data.get("note_id");
-  const supabase = createClient();
-  await supabase.from("notes").delete().eq("id", noteId);
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
+  const { error } = await supabase
+    .from("notes")
+    .delete()
+    .eq("id", noteId)
+    .eq("user_id", user.id);
+  if (error) throw new Error(error.message);
+  revalidatePath("/protected/activities");
   revalidatePath("/protected/profile");
 }
 
 export async function createActivity(data: ActivityFormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -136,41 +165,58 @@ export async function updateActivity(
   activityId: string,
   data: ActivityFormData,
 ) {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
   const { error } = await supabase
     .from("activities")
     .update({
       name: data.name,
       description: data.description,
     })
-    .eq("id", activityId);
+    .eq("id", activityId)
+    .eq("created_by", user.id);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/profile");
   revalidatePath("/protected/activities");
+  revalidatePath("/protected/calendar");
 }
 
 export async function deleteActivity(activityId: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
   const { error } = await supabase
     .from("activities")
     .delete()
-    .eq("id", activityId);
+    .eq("id", activityId)
+    .eq("created_by", user.id);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/profile");
   revalidatePath("/protected/activities");
+  revalidatePath("/protected/calendar");
 }
 
 export async function updateNote(noteId: string, noteText: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
   const { error } = await supabase
     .from("notes")
     .update({
       note: noteText,
       updated_at: new Date().toISOString(),
     })
-    .eq("id", noteId);
+    .eq("id", noteId)
+    .eq("user_id", user.id);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/profile");
@@ -191,7 +237,7 @@ export async function createEpilepsyEvent(data: {
   recovery_time_minutes?: number;
   notes?: string;
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -199,8 +245,8 @@ export async function createEpilepsyEvent(data: {
   if (!user) throw new Error("Not authenticated");
 
   const { error } = await supabase.from("epilepsy_events").insert({
-    user_id: user.id,
     ...data,
+    user_id: user.id,
   });
 
   if (error) throw new Error(error.message);
@@ -221,22 +267,32 @@ export async function updateEpilepsyEvent(
     notes?: string;
   },
 ) {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
   const { error } = await supabase
     .from("epilepsy_events")
     .update({ ...data, updated_at: new Date().toISOString() })
-    .eq("id", eventId);
+    .eq("id", eventId)
+    .eq("user_id", user.id);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/calendar");
 }
 
 export async function deleteEpilepsyEvent(eventId: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
   const { error } = await supabase
     .from("epilepsy_events")
     .delete()
-    .eq("id", eventId);
+    .eq("id", eventId)
+    .eq("user_id", user.id);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/calendar");
@@ -250,7 +306,7 @@ export async function createActivityLog(data: {
   intensity?: string;
   notes?: string;
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -258,8 +314,8 @@ export async function createActivityLog(data: {
   if (!user) throw new Error("Not authenticated");
 
   const { error } = await supabase.from("activity_logs").insert({
-    user_id: user.id,
     ...data,
+    user_id: user.id,
   });
 
   if (error) throw new Error(error.message);
@@ -276,22 +332,32 @@ export async function updateActivityLog(
     notes?: string;
   },
 ) {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
   const { error } = await supabase
     .from("activity_logs")
     .update({ ...data, updated_at: new Date().toISOString() })
-    .eq("id", logId);
+    .eq("id", logId)
+    .eq("user_id", user.id);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/calendar");
 }
 
 export async function deleteActivityLog(logId: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
   const { error } = await supabase
     .from("activity_logs")
     .delete()
-    .eq("id", logId);
+    .eq("id", logId)
+    .eq("user_id", user.id);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/calendar");
@@ -307,7 +373,7 @@ export async function createDailyHealthLog(data: {
   medications_taken?: string[];
   notes?: string;
 }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -315,8 +381,8 @@ export async function createDailyHealthLog(data: {
   if (!user) throw new Error("Not authenticated");
 
   const { error } = await supabase.from("daily_health_logs").insert({
-    user_id: user.id,
     ...data,
+    user_id: user.id,
   });
 
   if (error) throw new Error(error.message);
@@ -335,22 +401,32 @@ export async function updateDailyHealthLog(
     notes?: string;
   },
 ) {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
   const { error } = await supabase
     .from("daily_health_logs")
     .update({ ...data, updated_at: new Date().toISOString() })
-    .eq("id", logId);
+    .eq("id", logId)
+    .eq("user_id", user.id);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/calendar");
 }
 
 export async function deleteDailyHealthLog(logId: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
   const { error } = await supabase
     .from("daily_health_logs")
     .delete()
-    .eq("id", logId);
+    .eq("id", logId)
+    .eq("user_id", user.id);
 
   if (error) throw new Error(error.message);
   revalidatePath("/protected/calendar");

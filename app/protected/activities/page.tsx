@@ -6,7 +6,7 @@ import { activitiesWithSlugs } from "@/data/activities";
 import ActivityManager from "./ActivityManager";
 
 export default async function ActivitiesManagementPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },

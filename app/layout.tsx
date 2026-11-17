@@ -1,5 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -8,7 +9,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Epi Move",
-  description: "A activity managment app for epilepsy",
+  description: "Information, activity tracking, and health logs for people with epilepsy",
 };
 
 export default function RootLayout({
@@ -19,9 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={GeistSans.className}>
       <body className="bg-background text-foreground">
-        <main className="mx-auto flex h-full max-w-2xl flex-col items-center overflow-auto">
+        <main className="mx-auto flex h-dvh max-w-2xl flex-col items-center overflow-auto">
           {children}
         </main>
+        <Toaster />
       </body>
     </html>
   );

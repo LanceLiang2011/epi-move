@@ -6,7 +6,7 @@ import type { ActivityInfo } from "@/data/activities";
 import CalendarTabs from "./CalendarTabs";
 
 export default async function CalendarPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const {
     data: { user },

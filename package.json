@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -14,16 +16,16 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-toast": "^1.1.5",
-    "@supabase/ssr": "latest",
-    "@supabase/supabase-js": "latest",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.0",
     "autoprefixer": "10.4.17",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "date-fns": "^4.1.0",
     "framer-motion": "^11.0.25",
-    "geist": "^1.2.1",
+    "geist": "1.9.2",
     "lucide-react": "^0.366.0",
-    "next": "latest",
+    "next": "15.5.29",
     "postcss": "8.4.33",
     "react": "18.2.0",
     "react-big-calendar": "^1.19.4",
@@ -37,6 +39,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "1.61.1",
     "@tailwindcss/typography": "^0.5.13",
     "@types/node": "20.11.5",
     "@types/react": "18.2.48",

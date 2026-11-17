@@ -9,12 +9,12 @@ export default function ActivitiesGrid({
 }) {
   const filteredActivities = keyword
     ? activitiesWithSlugs.filter((activity) =>
-        activity.name.toLowerCase().includes(keyword),
+        activity.name.toLowerCase().includes(keyword.trim().toLowerCase()),
       )
     : activitiesWithSlugs;
 
   return (
-    <div className="grid grid-cols-3 grid-rows-2 gap-8 overflow-auto p-6 pt-20">
+    <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 sm:gap-8 overflow-auto p-6 pt-20">
       {filteredActivities.map(
         ({ name, url, slug }: { name: string; url: string; slug: Slugs }) => (
           <ActivityCard

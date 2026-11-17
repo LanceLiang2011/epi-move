@@ -157,7 +157,7 @@ export default function ActivityManager({ activities, notes, userId }: Props) {
                 {activity.created_by === userId && (
                   <div className="flex gap-2">
                     <Dialog
-                      open={isActivityDialogOpen}
+                      open={isActivityDialogOpen && editingActivity?.id === activity.id}
                       onOpenChange={setIsActivityDialogOpen}
                     >
                       <DialogTrigger asChild>
@@ -256,7 +256,7 @@ export default function ActivityManager({ activities, notes, userId }: Props) {
                                 </div>
                                 <div className="flex gap-1">
                                   <Dialog
-                                    open={isNoteDialogOpen}
+                                    open={isNoteDialogOpen && editingNote?.id === note.id}
                                     onOpenChange={setIsNoteDialogOpen}
                                   >
                                     <DialogTrigger asChild>

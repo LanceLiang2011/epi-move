@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    --background: 281, 48%, 12%;
+    --background: 281 48% 12%;
     --foreground: 0 0% 100%;
 
-    --btn-background: 275, 51%, 59%;
-    --btn-background-hover: 200 10% 89%;
+    --btn-background: 275 51% 59%;
+    --btn-background-hover: 275 45% 44%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -16,8 +16,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 275, 51%, 59%;
-    --primary-foreground: 0 0% 100;
+    --primary: 275 45% 44%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -73,7 +73,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-background;
+    @apply bg-background text-foreground;
   }
 
   html,
@@ -84,7 +84,9 @@
 
 @layer utilities {
   .main-wrapper {
-    height: calc(100vh - var(--nav-height));
+    height: calc(100dvh - var(--nav-height));
+    min-height: 0;
+    flex: 1 1 auto;
   }
   .top-nav {
     height: var(--nav-height);
@@ -125,3 +127,17 @@
   padding-bottom: 6px; /* Optional: adds some space between the text and the border */
   margin-bottom: 6px; /* Optional: adds space after the border */
 }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Keep calendar navigation usable inside the mobile shell. */
+.rbc-toolbar { gap: 0.5rem; }
+.rbc-toolbar button { min-height: 44px; }
+.rbc-toolbar .rbc-toolbar-label { flex-basis: 100%; }
+
+iframe { max-width: 100%; }

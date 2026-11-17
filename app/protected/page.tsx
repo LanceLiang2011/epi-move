@@ -33,7 +33,7 @@ export default function Page() {
         .from("users")
         .select("username, visited")
         .eq("id", data.user.id);
-      if (!userdata) return;
+      if (!userdata?.length) return;
       setUser(userdata?.at(0)?.username || "");
 
       await supabase

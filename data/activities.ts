@@ -1,4 +1,3 @@
-import { url } from "inspector";
 
 interface ActivitySum {
   slug: Slugs;
@@ -240,7 +239,7 @@ const contentsMap: Record<string, string> = {
   <h3 class="font-bold">Safety Tips</h3>
   <ul class="list-inside list-decimal">
       <li>Make sure to tell your friends, teammates, or coaches about your epilepsy and what to do in case of a seizure.<span class="citation">8</span></li>
-      <li>Wear proper gear like helmets, goggles, cleats, mouthguards, gloves and elbow and shoulder pads.<span class="citation">17</span> You can find <a class="text-secondary underline" href="https://epilepsyontario.org/living-with-epilepsy/safety-products/" target="_blank">a list of manufacturers here<span class="citation">18</span></a> that provide safety equipment.</li>
+      <li>Wear proper gear like helmets, goggles, cleats, mouthguards, gloves and elbow and shoulder pads.<span class="citation">17</span> You can find <a class="text-primary underline" href="https://epilepsyontario.org/living-with-epilepsy/safety-products/" target="_blank">a list of manufacturers here<span class="citation">18</span></a> that provide safety equipment.</li>
       <li>Before starting a practice or game, it's essential to inspect the field or goals at each end for any hazards like holes, debris, or broken glass.<span class="citation">17</span></li>
       <li>Make sure to store extra balls and equipment safely off to the sides of the field to prevent accidents during play.<span class="citation">17</span></li>
       <li>Before the game, take off any piercings or jewelry and make sure to warm up and stretch properly.<span class="citation">17</span></li>
@@ -258,7 +257,7 @@ const contentsMap: Record<string, string> = {
       <li>Remember to warm up and cool down to reduce the risk of injuries. Try stretching your arms, back, neck, trunk, wrists and ankles for up to 15 minutes before participating in martial arts.<span class="citation">21</span></li>
   </ul>
   `,
-  "rock-climbing": `<p>Generally, individuals with uncontrolled seizures should avoid rock or mountain climbing.<span class="citation">9</span> But many young people with epilepsy have done it before. Check out some of the stories <a href="URL-TO-STORIES" class="text-blue-500 hover:text-blue-700">here</a>. Be sure to ask your doctor first if you can participate in these activities.</p>
+  "rock-climbing": `<p>Generally, individuals with uncontrolled seizures should avoid rock or mountain climbing.<span class="citation">9</span> But many young people with epilepsy have done it before. Check out some of the stories <a href="/main/resources/success-stories" class="text-blue-500 hover:text-blue-700">here</a>. Be sure to ask your doctor first if you can participate in these activities.</p>
 
   <h3 class="font-bold">Safety Tips</h3>
   <ul class="list-inside list-decimal">

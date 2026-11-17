@@ -76,7 +76,7 @@ export default function ActivityLogForm({
     try {
       await createActivityLog({
         activity_id: activityId,
-        activity_date: activityDate,
+        activity_date: new Date(activityDate).toISOString(),
         duration_minutes: parseInt(duration),
         intensity: intensity,
         notes: notes.trim() || undefined,
@@ -98,6 +98,7 @@ export default function ActivityLogForm({
 
   const handleCreateActivity = async (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (!newActivityName.trim()) {
       toast({
@@ -154,7 +155,7 @@ export default function ActivityLogForm({
         </Label>
         <div className="flex gap-2">
           <Select value={activityId} onValueChange={setActivityId}>
-            <SelectTrigger className="flex-1 bg-white text-gray-900">
+            <SelectTrigger id="activity" className="flex-1 bg-white text-gray-900">
               <SelectValue placeholder="Select an activity" />
             </SelectTrigger>
             <SelectContent className="max-h-60 bg-white">
@@ -174,6 +175,7 @@ export default function ActivityLogForm({
               <Button
                 type="button"
                 size="icon"
+                aria-label="Create new activity"
                 className="shrink-0 bg-green-500 text-white hover:bg-green-600"
               >
                 <MdAdd className="h-5 w-5" />
@@ -257,7 +259,7 @@ export default function ActivityLogForm({
           Intensity
         </Label>
         <Select value={intensity} onValueChange={setIntensity}>
-          <SelectTrigger className="bg-white text-gray-900">
+          <SelectTrigger id="intensity" className="bg-white text-gray-900">
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="bg-white">

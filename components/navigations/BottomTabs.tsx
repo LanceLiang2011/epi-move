@@ -6,7 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import BottomTabsClient from "./BottomTabsClient";
 
 export default async function BottomTabs() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

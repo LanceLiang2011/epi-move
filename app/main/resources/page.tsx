@@ -5,23 +5,19 @@ import Image from "next/image";
 import { GiOpenBook } from "react-icons/gi";
 import { resources } from "@/data/resources";
 
-const TEMP_RESOURCES = [
-  "Setting goals",
-  "Nearby sports centres",
-  "Success stories",
-  "Online groups",
-];
-
-export default function Page() {
+export default async function Page({ searchParams }: { searchParams: Promise<{ keyword?: string }> }) {
+  const keyword = (await searchParams).keyword?.trim().toLowerCase() || "";
+  const filteredResources = resources.filter(resource => `${resource.name} ${resource.description}`.toLowerCase().includes(keyword));
   return (
     <div>
       <Heading
         title="resources"
         placeholder="Search for resources"
+        searchHref="/main/resources"
         Icon={<GiOpenBook size={60} />}
       />
       <div className="flex flex-col items-stretch gap-6 px-12 py-8 text-center">
-        {resources.map((resource) => (
+        {filteredResources.map((resource) => (
           <Link
             className=" flex items-center gap-4 rounded-md bg-gray-300 px-8 py-4 text-background"
             key={resource.slug}

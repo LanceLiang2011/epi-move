@@ -92,20 +92,11 @@ export default function CalendarView({
 
   // Convert events to calendar format
   const events: CalendarEvent[] = useMemo(() => {
-    const parseLocal = (dateString: string) => {
-      if (!dateString) return new Date();
-      let str = dateString;
-      if (str.includes("T")) {
-        str = str.endsWith("Z") ? str.slice(0, -1) : str;
-      } else {
-        str = str + "T00:00:00";
-      }
-      return new Date(str);
-    };
+
 
     const epilepsyCalendarEvents: CalendarEvent[] = epilepsyEvents.map(
       (event) => {
-        const eventDate = parseLocal(event.event_date);
+        const eventDate = new Date(event.event_date);
         return {
           id: event.id,
           title: `🔴 ${event.event_type === "seizure" ? "Seizure" : event.event_type}${event.seizure_type ? ` (${event.seizure_type})` : ""}`,
@@ -118,7 +109,7 @@ export default function CalendarView({
     );
 
     const activityCalendarEvents: CalendarEvent[] = activityLogs.map((log) => {
-      const logDate = parseLocal(log.activity_date);
+      const logDate = new Date(log.activity_date);
       const activity = activities.find((a) => a.id === log.activity_id);
       return {
         id: log.id,
@@ -131,7 +122,7 @@ export default function CalendarView({
     });
 
     const healthCalendarEvents: CalendarEvent[] = healthLogs.map((log) => {
-      const logDate = parseLocal(log.log_date);
+      const logDate = new Date(`${log.log_date}T00:00:00`);
       return {
         id: log.id,
         title: `💚 Health Log`,
@@ -151,15 +142,15 @@ export default function CalendarView({
 
   const eventStyleGetter = (event: CalendarEvent) => {
     let backgroundColor = "#9561cc";
-    if (event.type === "epilepsy") backgroundColor = "#ef4444";
-    if (event.type === "activity") backgroundColor = "#10b981";
-    if (event.type === "health") backgroundColor = "#3b82f6";
+    if (event.type === "epilepsy") backgroundColor = "#b91c1c";
+    if (event.type === "activity") backgroundColor = "#047857";
+    if (event.type === "health") backgroundColor = "#1d4ed8";
 
     return {
       style: {
         backgroundColor,
         borderRadius: "5px",
-        opacity: 0.8,
+        opacity: 1,
         color: "white",
         border: "0px",
         display: "block",
